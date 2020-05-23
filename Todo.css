@@ -4,5 +4,14 @@
     cursor: pointer;
 }
 .item {
+    /* display: inline-block; */
     padding: 5px;
+}
+.item .item-content{
+    display: inline-block;
+    /* padding: 5px; */
+}
+.item.completed .item-content{
+    color: red;
+    text-decoration: line-through;
 }

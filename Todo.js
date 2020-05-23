@@ -1,4 +1,5 @@
 var leftAmount = 0;
+
 //注册还是要在onload里不然的话textAddevent时候是空的
 window.onload = function () {
     var text = $("text");
@@ -24,24 +25,46 @@ function $(id) {
 function addTodo(value) {
     if (value == "") return;
 
-    var amountText = $("amount");
     var list = $("list");
 
     //此处必须用var新定义
     var item = document.createElement("div");
     item.className = "item";
-    item.innerHTML = value;
+    var itemContent = document.createElement("div");
+    itemContent.className = "item-content";
+    itemContent.innerHTML = value;
+    var deleteButton = document.createElement("button");
+    deleteButton.innerHTML = "X";
+    item.appendChild(itemContent);
+    item.appendChild(deleteButton);
     list.insertBefore(item, list.firstChild);
-    item.addEventListener("click", function (e) {
-        leftAmount--;
 
-        amountText.innerHTML = leftAmount + " left";
+    deleteButton.addEventListener("click", function (e) {
+        if (!item.classList.contains("completed")) leftAmount--;
+
+        updateAmount();
         list.removeChild(item);
+        e.stopPropagation();
+    });
+
+    item.addEventListener("click", function (e) {
+        if (item.classList.contains("completed")) {
+            leftAmount++;
+            item.classList.remove("completed");
+        } else {
+            leftAmount--;
+            item.classList.add("completed");
+        }
+        updateAmount();
     });
     //list.innerHTML = value+"<br/>"+list.innerHTML;
-    
+
     leftAmount++;
 
-    amountText.innerHTML = leftAmount + " left";
+    updateAmount();
     text.value = "";
+}
+function updateAmount() {
+    var amountText = $("amount");
+    amountText.innerHTML = leftAmount + " left";
 }
