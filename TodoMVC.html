@@ -45,23 +45,36 @@
 
 		<div id="out-model">
 			<div id="new">
-				<h3>Add TODO</h3>
-				<input
-					id="todo"
-					type="text"
-					placeholder="添加任务"
-					autofocus
-				/>
-				<!-- <div id="choose">
+				<ul id="submit-card">
+          <!-- 借用task-list item样式 -->
+					<li class="task-list-item submit-item">
+						<button
+							type="button"
+							class="tasks-list-item_check-button"
+						>
+							<i class="far fa-circle" aria-hidden="true"></i>
+						</button>
+						<input
+							id="todo"
+							type="text"
+							placeholder="添加任务"
+							autofocus
+						/>
+						<button id = "submit" class="submit-button">
+							<i class="fa fa-arrow-circle-o-up"></i>
+						</button>
+					</li>
+				</ul>
+
+				<div id="choose">
 					<button id="cancel">CANCEL</button>
-					<button id="ok">ADD</button>
-				</div> -->
+				</div>
 			</div>
-    </div>
-    
+		</div>
 
 		<button id="add">+</button>
-		<div id="count"></div>
+		<footer><span id="count"></span></footer>
+
 		<script src="model.js"></script>
 		<script src="provider-localStorage.js"></script>
 		<script src="TodoMVC.js"></script>

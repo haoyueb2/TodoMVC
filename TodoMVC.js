@@ -7,16 +7,59 @@ function $(id) {
 window.onload = function () {
 	model.init();
 
+	var addBtn = $("#add");
+	var outModel = $("#out-model");
+	addBtn.addEventListener(
+		"click",
+		function () {
+			addBtn.style.display = "none";
+			outModel.style.display = "block";
+			// 自动弹出软键盘
+			$("#todo").focus();
+		},
+		false
+	);
+	var submit = $("#submit");
+	submit.addEventListener(
+		"click",
+		function () {
+			addTask();
+		},
+		false
+	);
+	var cancel = $("#cancel");
+	// ok.addEventListener('click', function () {
+	//   // 用户确定添加todo项目
+	//   if (data.content === '') {
+	//     console.warn('please input your todo~')
+	//     alert('please input your todo~')
+	//     return
+	//   }
+	//   var time = getTime()
+	//   // 用户结束输入，将todo项目保存下来，更新界面
+	//   data.todos.push({
+	//     time: time,
+	//     content: data.content,
+	//     completed: false
+	//   })
+	//   outModel.style.display = 'none'
+	//   addBtn.style.display = 'block'
+	//   // 当前用户输入内容清空
+	//   data.content = ''
+	//   update()
+	//   // addBtn.classList.remove('out')
+	// }, false)
 
-    var addBtn = $('#add')
-    var outModel = $('#out-model')
-    addBtn.addEventListener('click', function () {
-      addBtn.style.display = 'none'
-      outModel.style.display = 'block'
-      // 自动弹出软键盘
-      $('#todo').focus()
-    }, false)
-
+	cancel.addEventListener(
+		"click",
+		function () {
+			outModel.style.display = "none";
+			addBtn.style.display = "block";
+			//   data.content = ''
+			update();
+		},
+		false
+	);
 
 	$("#todo").addEventListener("keyup", function (event) {
 		if (event.keyCode != 13) return;
@@ -63,15 +106,18 @@ function update() {
 			return !task.finished;
 		})
 		.forEach(function (task) {
-            // 保持最新在前
-            taskList.insertBefore(createListItem(task),taskList.firstChild);
+			// 保持最新在前
+			taskList.insertBefore(createListItem(task), taskList.firstChild);
 		});
 	data.items
 		.filter(function (task) {
 			return task.finished;
 		})
 		.forEach(function (task) {
-            finishedTaskList.insertBefore(createListItem(task),finishedTaskList.firstChild);
+			finishedTaskList.insertBefore(
+				createListItem(task),
+				finishedTaskList.firstChild
+			);
 		});
 }
 
