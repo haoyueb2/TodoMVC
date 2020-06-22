@@ -1,47 +1,126 @@
 .list-item {
-    padding: 10px;
-  }
-  
-  .list-item:hover {
-    background-color: #eee;
-    cursor: pointer;
-  }
-  
-  .list-item.completed {}
-  
-  .list-item .content {
-    display: inline-block;
-    min-width: 200px;
-  }
-  
-  .list-item.completed .content {
-    text-decoration: line-through;
-    color: #aaa;
-  }
-  
-  .list-item .delete {
-    border: 0;
-    background-color: transparent;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    border-radius:18px;
-    cursor: pointer;
-  }
-  
-  .list-item .delete:hover {
-    background-color: #ccc;
-    color: #fff;
-  }
-  
-  #todo {
-    width: 300px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 30px;
-    color: #555;
-  }
-  
-  #count{
-    margin-top:10px;
-  }
+	padding: 10px;
+}
+
+.list-item:hover {
+	background-color: #eee;
+	cursor: pointer;
+}
+
+.list-item.completed {
+}
+
+.list-item .content {
+	display: inline-block;
+	min-width: 200px;
+}
+
+.list-item.completed .content {
+	text-decoration: line-through;
+	color: #aaa;
+}
+
+.list-item .delete {
+	border: 0;
+	background-color: transparent;
+	width: 36px;
+	height: 36px;
+	line-height: 36px;
+	border-radius: 18px;
+	cursor: pointer;
+}
+
+.list-item .delete:hover {
+	background-color: #ccc;
+	color: #fff;
+}
+
+#todo {
+	width: 300px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 30px;
+	color: #555;
+}
+
+#count {
+	margin-top: 10px;
+}
+
+/* 参考 */
+.task-list-item {
+	margin: 0rem 1rem;
+	padding: 1rem 1rem 1rem 0rem;
+	border-bottom: 0.02rem solid #d3d3d3;
+}
+
+.task-list-item:hover,
+.task-list-item:hover > button {
+	background-color: #ededed;
+}
+
+.task-list-item:visited,
+.task-list-item:visited > button {
+	background-color: #f4f6ff;
+}
+
+.task-list-item:active,
+.task-list-item:active > button {
+	background-color: #f4f6ff;
+}
+
+.tasks-list-item__check-button {
+	margin-left: 1rem;
+}
+
+.task-list-item .task-text {
+	margin-left: 1.2rem;
+}
+
+.task-list-item__favorite-button {
+	float: right;
+}
+
+.finished-header {
+	display: flex;
+	margin: 0rem 1.07rem;
+	padding: 1rem 0rem 1rem 1rem;
+	border-bottom: 0.02rem solid #d3d3d3;
+}
+
+.finished-header .fas {
+	color: #a9a9a9;
+}
+.finished-title {
+	padding-left: 1.25rem;
+	font-weight: normal;
+}
+
+.finished-tasks-list__list {
+	text-decoration: line-through;
+}
+
+.finished-list-closed {
+	transform: rotate(-90deg);
+	transition: 0.1s linear;
+}
+
+.finished-list-open {
+	transform: rotate(0deg);
+	transition: 0.1s linear;
+}
+
+section {
+	display: block;
+}
+i {
+	color: #db4b54;
+}
+
+.icon-bold {
+	-webkit-text-stroke: 0.015rem black;
+}
+ol,
+ul {
+	list-style: none;
+}
