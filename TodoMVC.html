@@ -14,11 +14,11 @@
 	<body>
 		<input type="text" id="todo" placeholder="to do something" autofocus />
 
-		<section class="tasks-list__container">
-			<ul class="tasks-list__list"></ul>
+		<section class="tasks-list_container">
+			<ul class="tasks-list"></ul>
     </section>
     <!-- 可以考虑没有finished时把这里全部隐藏 -->
-		<section class="finished-tasks-list__container">
+		<section class="finished-tasks-list_container">
 			<div class="finished-header">
 				<button type="button" class="icon">
 					<i
@@ -30,10 +30,9 @@
 				<h2 class="finished-title">Finished</h2>
 			</div>
 
-			<ul class="finished-tasks-list__list"></ul>
+			<ul class="finished-tasks-list"></ul>
 		</section>
 
-		<div id="list"></div>
 		<div id="count"></div>
 
 		<script src="model.js"></script>

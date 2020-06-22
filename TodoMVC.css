@@ -33,7 +33,7 @@
 	background-color: #f4f6ff;
 }
 
-.tasks-list-item__check-button {
+.tasks-list-item_check-button {
 	margin-left: 1rem;
 }
 
@@ -41,7 +41,7 @@
 	margin-left: 1.2rem;
 }
 
-.task-list-item__favorite-button {
+.task-list-item_star-button {
 	float: right;
 }
 
@@ -60,7 +60,7 @@
 	font-weight: normal;
 }
 
-.finished-tasks-list__list {
+.finished-tasks-list {
 	text-decoration: line-through;
 }
 
