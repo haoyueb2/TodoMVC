@@ -3,11 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
     <title>TodoMVC example</title>
-    <!-- 参考 -->
-		<link
-			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap"
-			rel="stylesheet"
-		/>
+
 		<script
 			src="https://kit.fontawesome.com/338f0daf06.js"
 			crossorigin="anonymous"
@@ -20,8 +16,9 @@
 
 		<section class="tasks-list__container">
 			<ul class="tasks-list__list"></ul>
-		</section>
-		<section class="finished-tasks-list__container hidden">
+    </section>
+    <!-- 可以考虑没有finished时把这里全部隐藏 -->
+		<section class="finished-tasks-list__container">
 			<div class="finished-header">
 				<button type="button" class="icon">
 					<i
