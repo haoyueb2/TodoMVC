@@ -11,7 +11,7 @@ body {
 }
 #main {
     position: absolute;
-    top: 180px;
+    top: 80px;
     /* 不设置bottom add按钮无法固定 */
     bottom: 0px;
     overflow: auto;
@@ -167,3 +167,88 @@ ul {
     background-color: #4eb1eb;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   }
+
+  /* 添加部分，参考 */
+
+  #out-model {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    z-index: 100;
+    /* animation: fadeIn 1.5s linear; */
+  }
+
+  #new input::input-placeholder {
+    font-style: italic;
+    font-weight: 400;
+    color: #e6e6e6;
+  }
+  
+  #new input::-webkit-input-placeholder {
+    font-style: italic;
+    font-weight: 400;
+    color: #e6e6e6;
+  }
+  
+  #new input::-moz-placeholder {
+    font-style: italic;
+    font-weight: 400;
+    color: #e6e6e6;
+  }
+  
+  #new {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
+  #new h3 {
+    margin-left: 15px;
+    padding-top: 10px;
+  }
+  
+  #todo {
+    width: 90%;
+    margin-left: 15px;
+    position: relative;
+    font-size: 15px;
+    font-family: inherit;
+    font-weight: inherit;
+    border: 0;
+    outline: none;
+    color: inherit;
+    border: 1px solid #999999;
+    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  #todo {
+    border: none;
+    box-shadow: inset 0 -2px 1px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* #new #choose {
+    text-align: right;
+    padding: 20px 10px 15px;
+    color: red;
+    font-size: 15px;
+  }
+  
+  #new #choose button {
+    margin: 0 10px;
+  } */

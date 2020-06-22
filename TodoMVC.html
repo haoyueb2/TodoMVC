@@ -21,7 +21,7 @@
 				<h1>任务</h1>
 			</div>
 		</header>
-		<input type="text" id="todo" placeholder="to do something" autofocus />
+		<!-- <input type="text" id="todo" placeholder="to do something" autofocus /> -->
 		<section id="main">
 			<section class="tasks-list_container">
 				<ul id="tasks-list"></ul>
@@ -42,9 +42,26 @@
 				<ul id="finished-tasks-list"></ul>
 			</section>
 		</section>
-		
-    <button id="add">+</button>
-    <div id="count"></div>
+
+		<div id="out-model">
+			<div id="new">
+				<h3>Add TODO</h3>
+				<input
+					id="todo"
+					type="text"
+					placeholder="添加任务"
+					autofocus
+				/>
+				<!-- <div id="choose">
+					<button id="cancel">CANCEL</button>
+					<button id="ok">ADD</button>
+				</div> -->
+			</div>
+    </div>
+    
+
+		<button id="add">+</button>
+		<div id="count"></div>
 		<script src="model.js"></script>
 		<script src="provider-localStorage.js"></script>
 		<script src="TodoMVC.js"></script>

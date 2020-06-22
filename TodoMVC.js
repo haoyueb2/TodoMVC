@@ -7,6 +7,17 @@ function $(id) {
 window.onload = function () {
 	model.init();
 
+
+    var addBtn = $('#add')
+    var outModel = $('#out-model')
+    addBtn.addEventListener('click', function () {
+      addBtn.style.display = 'none'
+      outModel.style.display = 'block'
+      // 自动弹出软键盘
+      $('#todo').focus()
+    }, false)
+
+
 	$("#todo").addEventListener("keyup", function (event) {
 		if (event.keyCode != 13) return;
 		addTask();
@@ -52,14 +63,15 @@ function update() {
 			return !task.finished;
 		})
 		.forEach(function (task) {
-			taskList.append(createListItem(task));
+            // 保持最新在前
+            taskList.insertBefore(createListItem(task),taskList.firstChild);
 		});
 	data.items
 		.filter(function (task) {
 			return task.finished;
 		})
 		.forEach(function (task) {
-			finishedTaskList.append(createListItem(task));
+            finishedTaskList.insertBefore(createListItem(task),finishedTaskList.firstChild);
 		});
 }
 
