@@ -2,39 +2,49 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-    <title>TodoMVC example</title>
+		<title>TodoMVC example</title>
 
 		<script
 			src="https://kit.fontawesome.com/338f0daf06.js"
 			crossorigin="anonymous"
-    ></script>
-    
+		></script>
+		<!-- 移动设备使用，viewport -->
+		<meta
+			content="initial-scale=1, maximum-scale=1,user-scalable=no,width=device-width"
+			name="viewport"
+		/>
 		<link rel="stylesheet" href="TodoMVC.css" />
 	</head>
 	<body>
-		<input type="text" id="todo" placeholder="to do something" autofocus />
-
-		<section class="tasks-list_container">
-			<ul class="tasks-list"></ul>
-    </section>
-    <!-- 可以考虑没有finished时把这里全部隐藏 -->
-		<section class="finished-tasks-list_container">
-			<div class="finished-header">
-				<button type="button" class="icon">
-					<i
-						class="fas fa-chevron-down finished-list-open"
-						tabindex="0"
-						aria-hidden="true"
-					></i>
-				</button>
-				<h2 class="finished-title">Finished</h2>
+		<header>
+			<div id="header">
+				<h1>任务</h1>
 			</div>
+		</header>
+		<input type="text" id="todo" placeholder="to do something" autofocus />
+		<section id="main">
+			<section class="tasks-list_container">
+				<ul id="tasks-list"></ul>
+			</section>
+			<!-- 可以考虑没有finished时把这里全部隐藏 -->
+			<section class="finished-tasks-list_container">
+				<div class="finished-header">
+					<button type="button" class="icon">
+						<i
+							class="fas fa-chevron-down finished-list-open"
+							tabindex="0"
+							aria-hidden="true"
+						></i>
+					</button>
+					<h2 class="finished-title">Finished</h2>
+				</div>
 
-			<ul class="finished-tasks-list"></ul>
+				<ul id="finished-tasks-list"></ul>
+			</section>
 		</section>
-
-		<div id="count"></div>
-
+		
+    <button id="add">+</button>
+    <div id="count"></div>
 		<script src="model.js"></script>
 		<script src="provider-localStorage.js"></script>
 		<script src="TodoMVC.js"></script>

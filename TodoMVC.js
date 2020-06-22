@@ -1,4 +1,3 @@
-
 var taskId = 1; //use guid
 var items = [];
 function $(id) {
@@ -7,20 +6,19 @@ function $(id) {
 
 window.onload = function () {
 	model.init();
-	
+
 	$("#todo").addEventListener("keyup", function (event) {
 		if (event.keyCode != 13) return;
 		addTask();
 	});
 	var finishedHeader = $(".finished-header");
 	finishedHeader.addEventListener("click", toggleFinished);
-    this.update();
+	this.update();
 };
 function toggleFinished() {
-    var finishedHeader = $(".finished-header");
+	var finishedHeader = $(".finished-header");
 	var chevronIcon = finishedHeader.querySelector("i");
 	if (chevronIcon.classList.contains("finished-list-closed")) {
-
 		chevronIcon.classList.replace(
 			"finished-list-closed",
 			"finished-list-open"
@@ -30,48 +28,40 @@ function toggleFinished() {
 			"finished-list-open",
 			"finished-list-closed"
 		);
-    }
-    var finishedTaskList = $(
-		".finished-tasks-list"
-	);
+	}
+	var finishedTaskList = $("#finished-tasks-list");
 	finishedTaskList.classList.toggle("hidden");
 }
-
 
 function update() {
 	model.flush();
 	var data = model.data;
 
-
 	var activeCount = 0;
 	data.items.forEach(function (item) {
 		if (!item.finished) ++activeCount;
 	});
-    $("#count").innerHTML = activeCount + " items left";
-    
-	taskList = $(".tasks-list");
-	finishedTaskList = $(".finished-tasks-list");
+	$("#count").innerHTML = activeCount + " items left";
+
+	taskList = $("#tasks-list");
+	finishedTaskList = $("#finished-tasks-list");
 	taskList.innerHTML = "";
 	finishedTaskList.innerHTML = "";
 	data.items
-		.filter(function(task)  {return !task.finished})
-		.forEach(function(task) {taskList.append(createListItem(task))});
-    	data.items
-		.filter(function(task)  {return task.finished})
-		.forEach(function(task) {finishedTaskList.append(createListItem(task))});
-	// data.items
-	// 	.filter((task) => !task.finished && !task.starred)
-	// 	.forEach((task) => taskList.append(createListItem(task)));
-
-	// data.items
-	// 	.filter((task) => task.finished && task.starred)
-	// 	.forEach((task) => finishedTaskList.append(createListItem(task)));
-
-	// data.items
-	// 	.filter((task) => task.finished && !task.starred)
-	// 	.forEach((task) => finishedTaskList.append(createListItem(task)));
+		.filter(function (task) {
+			return !task.finished;
+		})
+		.forEach(function (task) {
+			taskList.append(createListItem(task));
+		});
+	data.items
+		.filter(function (task) {
+			return task.finished;
+		})
+		.forEach(function (task) {
+			finishedTaskList.append(createListItem(task));
+		});
 }
-
 
 function createListItem(taskObj) {
 	var item = document.createElement("li");
@@ -84,23 +74,23 @@ function createListItem(taskObj) {
 		checkButton.innerHTML = "<i class='far fa-circle'></i>";
 	} else {
 		checkButton.innerHTML = "<i class='fas fa-check-circle'></i>";
-    }
+	}
 
-    checkButton.addEventListener("click", function (event) {
-        taskObj.finished = !taskObj.finished;
-        //Todo: 考虑有finish才hidden
-        // var finishedContainer = $(
-        //     ".finished-tasks-list_container"
-        // );
-        // finishedContainer.classList.remove("hidden");
+	checkButton.addEventListener("click", function (event) {
+		taskObj.finished = !taskObj.finished;
+		//Todo: 考虑有finish才hidden
+		// var finishedContainer = $(
+		//     "#finished-tasks-list_container"
+		// );
+		// finishedContainer.classList.remove("hidden");
 		update();
 		event.stopPropagation();
-    });
-    
+	});
+
 	var newTaskText = document.createElement("span");
 	newTaskText.innerText = taskObj.msg;
-    newTaskText.className = "task-text";
-    
+	newTaskText.className = "task-text";
+
 	var starButton = document.createElement("button");
 	starButton.type = "button";
 	starButton.className = "task-list-item_star-button";
@@ -108,13 +98,13 @@ function createListItem(taskObj) {
 		starButton.innerHTML = "<i class='far fa-star gray'></i>";
 	} else {
 		starButton.innerHTML = "<i class='fas fa-star'></i>";
-    }
+	}
 
-    starButton.addEventListener("click", function (event) {
+	starButton.addEventListener("click", function (event) {
 		taskObj.starred = !taskObj.starred;
 		update();
 		event.stopPropagation();
-    });
+	});
 
 	item.append(checkButton, newTaskText, starButton);
 	return item;
@@ -130,12 +120,12 @@ function addTask() {
 	}
 
 	data.items.push({
-        taskId: `task${taskId}`,
+		taskId: `task${taskId}`,
 		msg: msg,
 		finished: false,
 		starred: false
-    });
-    taskId++;
+	});
+	taskId++;
 	update();
 	todo.value = "";
 }
