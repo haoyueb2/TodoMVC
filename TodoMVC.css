@@ -19,7 +19,7 @@ body {
 }
 
 #count {
-	
+
 	color:white;
 	margin-left: 1em;
 }
@@ -46,6 +46,7 @@ button {
 	list-style: none;
 	border-radius: 8px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	/* display: inline-block; */
 }
 /* submit还是加卡片好看 */
 /* .submit-item {
@@ -254,4 +255,38 @@ header h1 {
 	display: block;
 	font-size: large;
 	padding: 8px;
+}
+#menubtn {
+	background-color: rgb(67, 92, 235);
+	float : left;
+	margin-left: 1em;
+	margin-top: 1em;
+	font-size: 25px;
+}
+#menubtn i {
+	color :white;
+}
+#menu {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width:100%;
+	height: 100%;
+	background-color: white;
+	z-index: 102;
+}
+#menu-list {
+	padding:0px;
+}
+#menu li {
+	/* padding: 1rem 1rem 1rem 1rem; */
+	border-bottom: 0.02rem solid #d3d3d3;
+
+	background-color: white;
+	position: relative;
+	margin: 5px 12px;
+	font-size: 25px;
+	list-style: none;
+	border-radius: 8px;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }

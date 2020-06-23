@@ -17,13 +17,16 @@
 	</head>
 	<body>
 		<header>
+			<button id="menubtn">
+				<i class="fa fa-align-justify"></i>
+			</button>
 			<h1>Tasks</h1>
-			
+
 			<div id="dropdown">
 				<button id="dropdownbtn">
 					<i class="fa fa-ellipsis-v"></i>
 				</button>
-				<div id="dropdown-content" class = "hidden">
+				<div id="dropdown-content" class="hidden">
 					<button id="toggle-all">Toggle all</button>
 					<button id="delete-finished">Clear Finished</button>
 					<!-- <button id="display-finished">显示/隐藏已完成</button> -->
@@ -53,6 +56,17 @@
 			</section>
 		</section>
 
+		<div id="menu" class="hidden">
+			<!-- 改为今日时间 -->
+			<h1>welcome</h1>
+			<ul id="menu-list">
+				<li id="switch-all"><i class="fa fa-list"></i><span>All</span></li>
+				<li id="switch-starred"><i class="fa fa-star"></i><span>Important</span></li>
+				<li id="switch-scheduled"><i class="fa fa-calendar"></i><span>Scheduled</span></li>
+				<li id="switch-finished"><i class="fa fa-check-square-o"></i><span>Finished</span></li>
+			</ul>
+		</div>
+
 		<div id="out-model">
 			<div id="new">
 				<ul id="submit-card">
@@ -78,7 +92,7 @@
 
 				<div id="choose">
 					<spam>Deadline</spam>
-					<input id="deadline-input" type="date">
+					<input id="deadline-input" type="date" value="" />
 					<button id="cancel">Cancel</button>
 				</div>
 			</div>

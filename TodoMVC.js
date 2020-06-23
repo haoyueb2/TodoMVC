@@ -1,5 +1,3 @@
-
-
 var activeCount = 0;
 var isEdit = false;
 var editId;
@@ -18,6 +16,7 @@ window.onload = function () {
 	var dropdownbtn = $("#dropdownbtn");
 	var toggleAll = $("#toggle-all");
 	var deleteFinished = $("#delete-finished");
+	var deadlineInput = $("#deadline-input");
 	addBtn.addEventListener(
 		"click",
 		function () {
@@ -37,6 +36,7 @@ window.onload = function () {
 			outModel.style.display = "none";
 			addBtn.style.display = "block";
 			todo.value = "";
+			deadlineInput.value = "";
 		},
 		false
 	);
@@ -47,6 +47,7 @@ window.onload = function () {
 			outModel.style.display = "none";
 			addBtn.style.display = "block";
 			todo.value = "";
+			deadlineInput.value = "";
 			update();
 		},
 		false
@@ -61,12 +62,13 @@ window.onload = function () {
 		outModel.style.display = "none";
 		addBtn.style.display = "block";
 		todo.value = "";
+		deadlineInput.value = "";
 	});
 
 	finishedHeader.addEventListener("click", toggleFinished);
 	//全部完成的取消需要保存上一轮的完成吗？
 	toggleAll.addEventListener("click", function () {
-		if(activeCount != 0) {
+		if (activeCount != 0) {
 			model.data.items.forEach(function (task) {
 				task.finished = true;
 			});
@@ -91,6 +93,12 @@ window.onload = function () {
 				});
 				update();
 			});
+	});
+	$("#menubtn").addEventListener("click", function () {
+		$("#menu").classList.toggle("hidden");
+	});
+	this.$("#switch-all").addEventListener("click", function () {
+		$("#menu").classList.toggle("hidden");
 	});
 
 	this.update();
@@ -163,7 +171,7 @@ function createListItem(taskObj) {
 	checkButton.addEventListener("click", function (event) {
 		taskObj.finished = !taskObj.finished;
 		// 完成某项自动打开已完成
-		if($("#finished-tasks-list").classList.contains("hidden")) {
+		if ($("#finished-tasks-list").classList.contains("hidden")) {
 			toggleFinished();
 		}
 		//Todo: 考虑有finish才hidden
@@ -177,14 +185,12 @@ function createListItem(taskObj) {
 	newTaskText.innerText = taskObj.msg;
 	newTaskText.className = "task-text";
 
-
-
 	var taskDeadline = document.createElement("span");
 	if (taskObj.deadline) {
 		taskDeadline.innerText = taskObj.deadline;
 		taskDeadline.className = "task-deadline";
 	}
-	taskContent.append(newTaskText,taskDeadline);
+	taskContent.append(newTaskText, taskDeadline);
 
 	var starButton = document.createElement("button");
 	starButton.type = "button";
@@ -201,24 +207,23 @@ function createListItem(taskObj) {
 		event.stopPropagation();
 	});
 
-	item.addEventListener("click",function(event) {
-
+	item.addEventListener("click", function (event) {
 		id = Number(this.id);
-		var currentItem = model.data.items.filter(function (item){
+		var currentItem = model.data.items.filter(function (item) {
 			return item.taskId == id;
 		})[0];
 		// console.log(currentItem);
 
-		$('#todo').value = currentItem.msg;
-		$('#deadline-input').value = currentItem.deadline;
-		$('#add').style.display = "none";
-		$('#out-model').style.display = "block";
+		$("#todo").value = currentItem.msg;
+		$("#deadline-input").value = currentItem.deadline;
+		$("#add").style.display = "none";
+		$("#out-model").style.display = "block";
 		isEdit = true;
 		// 自动弹出软键盘
 		editId = id;
 		todo.focus();
 	});
-	
+
 	item.append(checkButton, taskContent, starButton);
 	return item;
 }
@@ -236,7 +241,7 @@ function addTask() {
 		alert("please input your todo");
 		return;
 	}
-	if(!isEdit) {
+	if (!isEdit) {
 		data.items.push({
 			taskId: taskId,
 			msg: msg,
@@ -245,13 +250,12 @@ function addTask() {
 			starred: false
 		});
 		data.taskId++;
-	} else{
-		var currentItem = model.data.items.filter(function (item){
+	} else {
+		var currentItem = model.data.items.filter(function (item) {
 			return item.taskId == editId;
 		})[0];
-		currentItem.msg =msg;
+		currentItem.msg = msg;
 		currentItem.deadline = deadline;
-		
 	}
 
 	update();
