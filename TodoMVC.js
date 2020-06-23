@@ -33,6 +33,7 @@ window.onload = function () {
 			addTask();
 			outModel.style.display = "none";
 			addBtn.style.display = "block";
+			todo.value = "";
 		},
 		false
 	);
@@ -62,23 +63,23 @@ window.onload = function () {
 	//全部完成的取消需要保存上一轮的完成吗？
 	finishAll.addEventListener("click", function () {
 		model.data.items.forEach(function (task) {
-			task.finished = !task.finished;;
+			task.finished = !task.finished;
 		});
 		update();
 	});
 
-	deleteFinished.addEventListener("click",function() {
+	deleteFinished.addEventListener("click", function () {
 		model.data.items
-		.filter(function (task) {
-			return task.finished;
-		})
-		.forEach(function (task) {
-			// 保持最新在前
-			model.data.items = model.data.items.filter(function (task) {
-				return !task.finished;
+			.filter(function (task) {
+				return task.finished;
+			})
+			.forEach(function (task) {
+				// 保持最新在前
+				model.data.items = model.data.items.filter(function (task) {
+					return !task.finished;
+				});
+				update();
 			});
-			update();
-		});
 	});
 
 	this.update();
@@ -154,10 +155,18 @@ function createListItem(taskObj) {
 		update();
 		event.stopPropagation();
 	});
-
+	var taskContent = document.createElement("div");
+	taskContent.className = "task-content";
 	var newTaskText = document.createElement("span");
 	newTaskText.innerText = taskObj.msg;
 	newTaskText.className = "task-text";
+
+	var taskDeadline = document.createElement("span");
+	if (taskObj.deadline) {
+		taskDeadline.innerText = taskObj.deadline;
+		taskDeadline.className = "task-deadline";
+	}
+	taskContent.append(newTaskText,taskDeadline);
 
 	var starButton = document.createElement("button");
 	starButton.type = "button";
@@ -173,16 +182,18 @@ function createListItem(taskObj) {
 		update();
 		event.stopPropagation();
 	});
-
-	item.append(checkButton, newTaskText, starButton);
+	
+	item.append(checkButton, taskContent, starButton);
 	return item;
 }
 
 function addTask() {
 	var todo = $("#todo");
-
+	var deadlineInput = $("#deadline-input");
 	var msg = todo.value;
 	var data = model.data;
+	var deadline = deadlineInput.value;
+	console.log(deadline);
 	if (msg == "") {
 		console.warn("msg is empty");
 		alert("please input your todo~");
@@ -192,6 +203,7 @@ function addTask() {
 	data.items.push({
 		taskId: `task${taskId}`,
 		msg: msg,
+		deadline: deadline,
 		finished: false,
 		starred: false
 	});
