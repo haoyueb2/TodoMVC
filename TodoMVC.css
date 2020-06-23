@@ -18,9 +18,11 @@ body {
 	width: 100%;
 }
 
-/* #count {
-	margin-top: 10px;
-} */
+#count {
+	
+	color:white;
+	margin-left: 1em;
+}
 /* 覆盖默认样式 */
 button {
 	background-color: white;

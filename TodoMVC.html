@@ -18,12 +18,13 @@
 	<body>
 		<header>
 			<h1>Tasks</h1>
+			
 			<div id="dropdown">
 				<button id="dropdownbtn">
 					<i class="fa fa-ellipsis-v"></i>
 				</button>
 				<div id="dropdown-content" class = "hidden">
-					<button id="finish-all">Toggle all</button>
+					<button id="toggle-all">Toggle all</button>
 					<button id="delete-finished">Clear Finished</button>
 					<!-- <button id="display-finished">显示/隐藏已完成</button> -->
 				</div>
@@ -32,6 +33,7 @@
 		<!-- <input type="text" id="todo" placeholder="to do something" autofocus /> -->
 		<section id="main">
 			<section class="tasks-list_container">
+				<span id="count"></span>
 				<ul id="tasks-list"></ul>
 			</section>
 			<!-- 可以考虑没有finished时把这里全部隐藏 -->
@@ -76,14 +78,13 @@
 
 				<div id="choose">
 					<spam>Deadline</spam>
-					<input id = 'deadline-input' type="date" value="" />
+					<input id="deadline-input" type="date">
 					<button id="cancel">Cancel</button>
 				</div>
 			</div>
 		</div>
 
 		<button id="add">+</button>
-		<footer><span id="count"></span></footer>
 
 		<script src="model.js"></script>
 		<script src="provider-localStorage.js"></script>

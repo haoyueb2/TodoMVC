@@ -4,6 +4,7 @@ window.model = {
       items: [
         // {msg:'', completed: false}
       ],
+      taskId : 1,
       msg: '',
       filter: 'All'
     },
