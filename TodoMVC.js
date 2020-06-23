@@ -60,6 +60,10 @@ window.onload = function () {
 		},
 		false
 	);
+	this.$('#dropdown-content').classList.add("hidden")
+	this.$('#dropdownbtn').addEventListener('click',function(event) {
+		$('#dropdown-content').classList.toggle("hidden");
+	})
 
 	$("#todo").addEventListener("keyup", function (event) {
 		if (event.keyCode != 13) return;

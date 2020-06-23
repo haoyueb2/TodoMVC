@@ -17,8 +17,16 @@
 	</head>
 	<body>
 		<header>
-			<div id="header">
-				<h1>任务</h1>
+			<h1>任务</h1>
+			<div id="dropdown">
+				<button id="dropdownbtn">
+					<i class="fa fa-ellipsis-v"></i>
+				</button>
+				<div id="dropdown-content">
+					<button>全部完成</button>
+					<button>全部删除</button>
+					<button>隐藏已完成</button>
+				</div>
 			</div>
 		</header>
 		<!-- <input type="text" id="todo" placeholder="to do something" autofocus /> -->
@@ -46,7 +54,7 @@
 		<div id="out-model">
 			<div id="new">
 				<ul id="submit-card">
-          <!-- 借用task-list item样式 -->
+					<!-- 借用task-list item样式 -->
 					<li class="task-list-item submit-item">
 						<button
 							type="button"
@@ -60,13 +68,15 @@
 							placeholder="添加任务"
 							autofocus
 						/>
-						<button id = "submit" class="submit-button">
+						<button id="submit" class="submit-button">
 							<i class="fa fa-arrow-circle-o-up"></i>
 						</button>
 					</li>
 				</ul>
 
 				<div id="choose">
+					<spam>截止日期</spam>
+					<input type="date" value="" />
 					<button id="cancel">CANCEL</button>
 				</div>
 			</div>
