@@ -9,68 +9,78 @@ window.onload = function () {
 
 	var addBtn = $("#add");
 	var outModel = $("#out-model");
+	var todo = $("#todo");
+	var cancel = $("#cancel");
+	var submit = $("#submit");
+	var finishedHeader = $(".finished-header");
+	var dropdownbtn = $("#dropdownbtn");
+	var finishAll = $("#finish-all");
+	var deleteFinished = $("#delete-finished");
 	addBtn.addEventListener(
 		"click",
 		function () {
 			addBtn.style.display = "none";
 			outModel.style.display = "block";
 			// 自动弹出软键盘
-			$("#todo").focus();
+			todo.focus();
 		},
 		false
 	);
-	var submit = $("#submit");
+
 	submit.addEventListener(
 		"click",
 		function () {
 			addTask();
+			outModel.style.display = "none";
+			addBtn.style.display = "block";
 		},
 		false
 	);
-	var cancel = $("#cancel");
-	// ok.addEventListener('click', function () {
-	//   // 用户确定添加todo项目
-	//   if (data.content === '') {
-	//     console.warn('please input your todo~')
-	//     alert('please input your todo~')
-	//     return
-	//   }
-	//   var time = getTime()
-	//   // 用户结束输入，将todo项目保存下来，更新界面
-	//   data.todos.push({
-	//     time: time,
-	//     content: data.content,
-	//     completed: false
-	//   })
-	//   outModel.style.display = 'none'
-	//   addBtn.style.display = 'block'
-	//   // 当前用户输入内容清空
-	//   data.content = ''
-	//   update()
-	//   // addBtn.classList.remove('out')
-	// }, false)
 
 	cancel.addEventListener(
 		"click",
 		function () {
 			outModel.style.display = "none";
 			addBtn.style.display = "block";
-			//   data.content = ''
+			todo.value = "";
 			update();
 		},
 		false
 	);
-	this.$('#dropdown-content').classList.add("hidden")
-	this.$('#dropdownbtn').addEventListener('click',function(event) {
-		$('#dropdown-content').classList.toggle("hidden");
-	})
+	dropdownbtn.addEventListener("click", function () {
+		$("#dropdown-content").classList.toggle("hidden");
+	});
 
-	$("#todo").addEventListener("keyup", function (event) {
+	todo.addEventListener("keyup", function (event) {
 		if (event.keyCode != 13) return;
 		addTask();
+		outModel.style.display = "none";
+		addBtn.style.display = "block";
 	});
-	var finishedHeader = $(".finished-header");
+
 	finishedHeader.addEventListener("click", toggleFinished);
+	//全部完成的取消需要保存上一轮的完成吗？
+	finishAll.addEventListener("click", function () {
+		model.data.items.forEach(function (task) {
+			task.finished = !task.finished;;
+		});
+		update();
+	});
+
+	deleteFinished.addEventListener("click",function() {
+		model.data.items
+		.filter(function (task) {
+			return task.finished;
+		})
+		.forEach(function (task) {
+			// 保持最新在前
+			model.data.items = model.data.items.filter(function (task) {
+				return !task.finished;
+			});
+			update();
+		});
+	});
+
 	this.update();
 };
 function toggleFinished() {
@@ -141,10 +151,6 @@ function createListItem(taskObj) {
 	checkButton.addEventListener("click", function (event) {
 		taskObj.finished = !taskObj.finished;
 		//Todo: 考虑有finish才hidden
-		// var finishedContainer = $(
-		//     "#finished-tasks-list_container"
-		// );
-		// finishedContainer.classList.remove("hidden");
 		update();
 		event.stopPropagation();
 	});
@@ -174,10 +180,12 @@ function createListItem(taskObj) {
 
 function addTask() {
 	var todo = $("#todo");
+
 	var msg = todo.value;
 	var data = model.data;
 	if (msg == "") {
 		console.warn("msg is empty");
+		alert("please input your todo~");
 		return;
 	}
 
@@ -189,5 +197,4 @@ function addTask() {
 	});
 	taskId++;
 	update();
-	todo.value = "";
 }

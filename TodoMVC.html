@@ -17,15 +17,15 @@
 	</head>
 	<body>
 		<header>
-			<h1>任务</h1>
+			<h1>Tasks</h1>
 			<div id="dropdown">
 				<button id="dropdownbtn">
 					<i class="fa fa-ellipsis-v"></i>
 				</button>
-				<div id="dropdown-content">
-					<button>全部完成</button>
-					<button>全部删除</button>
-					<button>隐藏已完成</button>
+				<div id="dropdown-content" class = "hidden">
+					<button id="finish-all">Toggle all</button>
+					<button id="delete-finished">Clear Finished</button>
+					<!-- <button id="display-finished">显示/隐藏已完成</button> -->
 				</div>
 			</div>
 		</header>
@@ -65,7 +65,7 @@
 						<input
 							id="todo"
 							type="text"
-							placeholder="添加任务"
+							placeholder="Add new tasks"
 							autofocus
 						/>
 						<button id="submit" class="submit-button">
@@ -75,9 +75,9 @@
 				</ul>
 
 				<div id="choose">
-					<spam>截止日期</spam>
+					<spam>Deadline</spam>
 					<input type="date" value="" />
-					<button id="cancel">CANCEL</button>
+					<button id="cancel">Cancel</button>
 				</div>
 			</div>
 		</div>
