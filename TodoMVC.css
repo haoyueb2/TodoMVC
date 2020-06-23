@@ -1,6 +1,6 @@
 /* 覆盖默认样式 */
 body {
-	background-color: rgb(67, 92, 235);
+	/* background-color: rgb(67, 92, 235); */
 	margin: 0;
 	padding: 0;
 	height: 100%;
@@ -17,7 +17,12 @@ body {
 	overflow-y: scroll;
 	width: 100%;
 }
-
+.theme-color {
+	background-color: rgb(67, 92, 235);
+}
+.theme-color2 {
+	background-color: #4eb1eb;;
+}
 #count {
 
 	color:white;
@@ -47,6 +52,7 @@ button {
 	border-radius: 8px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 	/* display: inline-block; */
+	overflow: hidden;
 }
 /* submit还是加卡片好看 */
 /* .submit-item {
@@ -77,6 +83,11 @@ button {
 	margin-left: 12px;
 	position: relative;
 	bottom: 10px;
+	/* display: block; */
+	width: 70%;
+	/* white-space: pre-line; */
+	/* margin-right: 2em;
+	padding-right: 2em; */
 }
 .task-deadline {
 	color:gray;
@@ -86,7 +97,11 @@ button {
 	left:4.2em;
 }
 .task-content {
-	display: inline;
+	display: inline-block;
+	width: 85%;
+	/* overflow: hidden; */
+	/* margin-right: 2em;
+	padding-right: 2em; */
 }
 
 .task-list-item_star-button,.submit-button {
@@ -101,10 +116,13 @@ button {
 	border-bottom: 0.02rem solid #d3d3d3;
 	color: white;
 }
-
+.finished-header i{
+	color:white;
+}
+/* 
 .finished-header button {
 	background-color: rgb(67, 92, 235);
-}
+} */
 .finished-title {
 	padding-left: 1.25rem;
 	font-weight: normal;
@@ -182,7 +200,8 @@ header h1 {
 	position: absolute;
 	bottom: 35px;
 	right: 10px;
-	background-color: #4eb1eb;
+	/* background-color: rgb(67, 92, 235); */
+	/* background-color: #4eb1eb; */
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -229,7 +248,7 @@ header h1 {
 	/* display: inline-block; */
 }
 #dropdownbtn {
-	background-color:  rgb(67, 92, 235);
+	/* background-color:  rgb(67, 92, 235); */
  
 	margin-right: 30px;
 	/* position: relative;
@@ -257,7 +276,7 @@ header h1 {
 	padding: 8px;
 }
 #menubtn {
-	background-color: rgb(67, 92, 235);
+	/* background-color: rgb(67, 92, 235); */
 	float : left;
 	margin-left: 1em;
 	margin-top: 1em;

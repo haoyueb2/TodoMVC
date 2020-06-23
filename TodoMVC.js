@@ -4,6 +4,9 @@ var editId;
 function $(id) {
 	return document.querySelector(id);
 }
+var $All = function(id) {
+    return document.querySelectorAll(id);
+};
 
 window.onload = function () {
 	model.init();
@@ -97,10 +100,17 @@ window.onload = function () {
 	$("#menubtn").addEventListener("click", function () {
 		$("#menu").classList.toggle("hidden");
 	});
-	this.$("#switch-all").addEventListener("click", function () {
+	this.$("#menu").addEventListener("click", function () {
 		$("#menu").classList.toggle("hidden");
 	});
 
+	this.$("#theme1").addEventListener("click",function() {
+		var nodelist = $All(".theme-color");
+		nodelist.forEach(function(node) {
+			node.classList.remove("theme-color");
+			node.classList.add("theme-color2");
+		})
+	})
 	this.update();
 };
 function toggleFinished() {
