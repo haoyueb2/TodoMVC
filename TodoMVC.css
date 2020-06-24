@@ -54,6 +54,9 @@ button {
 	/* display: inline-block; */
 	overflow: hidden;
 }
+.task-list-item i{
+	font-size: 20px;
+}
 /* submit还是加卡片好看 */
 /* .submit-item {
     border: none;
@@ -131,7 +134,7 @@ button {
 	font-weight: normal;
 }
 
-#finished-tasks-list span {
+#finished-tasks-list label {
 	text-decoration: line-through;
 }
 
