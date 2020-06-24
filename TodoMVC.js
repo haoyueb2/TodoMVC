@@ -229,7 +229,7 @@ function createListItem(taskObj) {
 
 	var taskContent = document.createElement("div");
 	taskContent.className = "task-content";
-	var newTaskText = document.createElement("span");
+	var newTaskText = document.createElement("label");
 	newTaskText.innerText = taskObj.msg;
 	newTaskText.className = "task-text";
 

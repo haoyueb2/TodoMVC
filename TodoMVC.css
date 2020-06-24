@@ -47,7 +47,7 @@ button {
 	background-color: white;
 	position: relative;
 	margin: 5px 12px;
-	font-size: 25px;
+	font-size: 1em;
 	list-style: none;
 	border-radius: 8px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
@@ -77,15 +77,16 @@ button {
 .tasks-list-item_check-button {
 	/* margin-left: 1rem; */
 	float: left;
+
 }
 
 .task-text {
-	margin-left: 12px;
+	margin-left: 10px;
 	position: relative;
-	bottom: 10px;
-	/* display: block; */
-	width: 70%;
-	/* white-space: pre-line; */
+	bottom: 5px;
+	display: block;
+	/* width: 70%; */
+	word-break: break-all;
 	/* margin-right: 2em;
 	padding-right: 2em; */
 }
@@ -94,11 +95,11 @@ button {
 	font-size: small;
 	position: absolute;
 	bottom:5px;
-	left:4.2em;
+	left:3.5em;
 }
 .task-content {
 	display: inline-block;
-	width: 85%;
+	width: 83%;
 	/* overflow: hidden; */
 	/* margin-right: 2em;
 	padding-right: 2em; */
@@ -106,7 +107,9 @@ button {
 
 .task-list-item_star-button,.submit-button {
 	float: right;
-	height: 100%;
+	/* text-align: center;
+	height: 100%; */
+
 }
 
 .finished-header {
