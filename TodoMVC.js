@@ -4,10 +4,14 @@ var editId;
 function $(id) {
 	return document.querySelector(id);
 }
-var $All = function(id) {
-    return document.querySelectorAll(id);
+var $All = function (id) {
+	return document.querySelectorAll(id);
 };
 
+function toggleInput() {
+	$("#add").classList.toggle("hidden");
+	$("#out-model").classList.toggle("hidden");
+}
 window.onload = function () {
 	model.init();
 	var addBtn = $("#add");
@@ -20,11 +24,11 @@ window.onload = function () {
 	var toggleAll = $("#toggle-all");
 	var deleteFinished = $("#delete-finished");
 	var deadlineInput = $("#deadline-input");
+
 	addBtn.addEventListener(
 		"click",
 		function () {
-			addBtn.style.display = "none";
-			outModel.style.display = "block";
+			toggleInput();
 			isEdit = false;
 			// 自动弹出软键盘
 			todo.focus();
@@ -36,8 +40,7 @@ window.onload = function () {
 		"click",
 		function () {
 			addTask();
-			outModel.style.display = "none";
-			addBtn.style.display = "block";
+			toggleInput()
 			todo.value = "";
 			deadlineInput.value = "";
 		},
@@ -47,8 +50,7 @@ window.onload = function () {
 	cancel.addEventListener(
 		"click",
 		function () {
-			outModel.style.display = "none";
-			addBtn.style.display = "block";
+			toggleInput()
 			todo.value = "";
 			deadlineInput.value = "";
 			update();
@@ -62,8 +64,7 @@ window.onload = function () {
 	todo.addEventListener("keyup", function (event) {
 		if (event.keyCode != 13) return;
 		addTask();
-		outModel.style.display = "none";
-		addBtn.style.display = "block";
+		toggleInput()
 		todo.value = "";
 		deadlineInput.value = "";
 	});
@@ -104,13 +105,38 @@ window.onload = function () {
 		$("#menu").classList.toggle("hidden");
 	});
 
-	this.$("#theme1").addEventListener("click",function() {
+	this.$("#theme1").addEventListener("click", function () {
 		var nodelist = $All(".theme-color");
-		nodelist.forEach(function(node) {
+		nodelist.forEach(function (node) {
 			node.classList.remove("theme-color");
 			node.classList.add("theme-color2");
-		})
-	})
+		});
+	});
+	$("#switch-all").addEventListener("click", function () {
+		model.data.filter = "all";
+		$("#title").innerHTML = "Tasks";
+		update();
+	});
+
+	$("#switch-starred").addEventListener("click", function () {
+		model.data.filter = "starred";
+		$("#title").innerHTML = "Important";
+		update();
+	});
+	$("#switch-scheduled").addEventListener("click", function () {
+		model.data.filter = "scheduled";
+		$("#title").innerHTML = "Scheduled";
+		update();
+	});
+	$("#switch-finished").addEventListener("click", function () {
+		model.data.filter = "finished";
+		$("#title").innerHTML = "Finished";
+		$(".finished-header").classList.toggle("hidden");
+		$("#add").classList.toggle("hidden");
+		$("#count").classList.toggle("hidden")
+		update();
+	});
+
 	this.update();
 };
 function toggleFinished() {
@@ -134,18 +160,38 @@ function toggleFinished() {
 function update() {
 	model.flush();
 	var data = model.data;
-
+	var items =data.items;
 	activeCount = 0;
-	data.items.forEach(function (item) {
-		if (!item.finished) ++activeCount;
-	});
-	$("#count").innerHTML = activeCount + " items left";
+
 
 	taskList = $("#tasks-list");
 	finishedTaskList = $("#finished-tasks-list");
 	taskList.innerHTML = "";
 	finishedTaskList.innerHTML = "";
-	data.items
+
+	
+	if(data.filter == "starred") {
+		items = data.items.filter(function (task) {
+			return task.starred;
+		})
+	}
+	else if(data.filter == "scheduled") {
+		items = data.items.filter(function (task) {
+			return task.deadline != "";
+		})
+	}
+	else if (data.filter == "finished") {
+		items = data.items.filter(function (task) {
+			return task.finished;
+		})
+	}
+	//显示当前类别剩下的
+	items.forEach(function (item) {
+		if (!item.finished) ++activeCount;
+	});
+	$("#count").innerHTML = activeCount + " items left";
+	// console.log(items);
+	items
 		.filter(function (task) {
 			return !task.finished;
 		})
@@ -153,7 +199,7 @@ function update() {
 			// 保持最新在前
 			taskList.insertBefore(createListItem(task), taskList.firstChild);
 		});
-	data.items
+	items
 		.filter(function (task) {
 			return task.finished;
 		})
