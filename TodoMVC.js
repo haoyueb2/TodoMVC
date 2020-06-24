@@ -296,11 +296,14 @@ function createListItem(taskObj) {
 		function (event) {
 			var newTouch = event.touches[0];
 			offset = newTouch.clientX - oldTouch.clientX;
-			touchDom.style.transition = "all 0.2s";
+			// touchDom.style.transition = "all 0.2s";
 			touchDom.style.left = offset + "px";
 			if (Math.abs(offset) >= deviceWidth / 2.5) {
 				del = true;
-				touchDom.style.color = "red";
+				touchDom.style.backgroundColor = "red";
+			} else {
+				del = false;
+				touchDom.style.backgroundColor = "white";
 			}
 		},
 		false
