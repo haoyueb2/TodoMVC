@@ -277,9 +277,8 @@ function createListItem(taskObj) {
 	var oldTouch;
 	// 触碰的元素
 	var touchDom;
-	// 默认左滑不删除元素
+
 	var del = false;
-	var verticalOffset;
 	var offset;
 	// 滑动事件绑定
 	item.addEventListener(
@@ -297,67 +296,34 @@ function createListItem(taskObj) {
 		function (event) {
 			var newTouch = event.touches[0];
 			offset = newTouch.clientX - oldTouch.clientX;
-			if (Math.abs(offset) < deviceWidth / 5) {
-				touchDom.style.transition = "all 0.2s";
-				touchDom.style.left = offset + "px";
-			} else {
-				// del = false;
-				// touchDom.style.transition = "all 1.2s ease-in";
-				touchDom.style.transition = "all 0.2s";
-				touchDom.style.left = offset + "px";
-				touchDom.innerHTML = "delete";
-				// 延迟设置太长就不存id是为啥
-				// console.log(touchDom)
-				// }
+			touchDom.style.transition = "all 0.2s";
+			touchDom.style.left = offset + "px";
+			if (Math.abs(offset) >= deviceWidth / 2.5) {
+				del = true;
+				touchDom.style.color = "red";
 			}
 		},
 		false
 	);
-	// item.addEventListener(
-	// 	"touchend",
-	// 	function (event) {
-	// 		if (!del) {
-	// 			touchDom.style.left = 0;
-	// 		}
-	// 		console.log(Math.abs(offset) >= deviceWidth / 5);
-
-	// 		if (Math.abs(offset) >= deviceWidth / 5) {
-	// 			// del = true;
-	// 			// touchDom.style.transition = "all 1.2s ease-in";
-	// 			// if (offset < 0) {
-	// 			// 	// 左滑
-	// 			// 	touchDom.style.left = -deviceWidth * 4 + "px";
-	// 			// }
-	// 			// // 右滑
-	// 			// else {
-	// 			// 	touchDom.style.left = deviceWidth * 4 + "px";
-	// 			// }
-	// 			// 延迟设置太长就不存id是为啥
-	// 			for (var i = 0; i < model.data.items.length; i++) {
-	// 				if (model.data.items[i].taskId == Number(touchDom.id)) {
-	// 					model.data.items.splice(i, 1);
-	// 				}
-	// 			}
-	// 			update();
-	// 			// setTimeout(function () {
-	// 			// 	for (var i = 0; i < model.data.items.length; i++) {
-	// 			// 		if (
-	// 			// 			model.data.items[i].taskId ==
-	// 			// 			Number(touchDom.id)
-	// 			// 		) {
-	// 			// 			model.data.items.splice(i, 1);
-	// 			// 		}
-	// 			// 	}
-	// 			// 	update();
-	// 			// }, 0);
-	// 			// console.log(touchDom)
-	// 		}
-
-	// 		touchDom = null;
-	// 		oldTouch = null;
-	// 	},
-	// 	false
-	// );
+	item.addEventListener(
+		"touchend",
+		function (event) {
+			if (!del) {
+				touchDom.style.left = 0;
+			}
+			else{
+				for (var i = 0; i < model.data.items.length; i++) {
+					if (model.data.items[i].taskId == Number(touchDom.id)) {
+						model.data.items.splice(i, 1);
+					}
+				}
+				update();
+			}
+			touchDom = null;
+			oldTouch = null;
+		},
+		false
+	);
 
 	item.append(checkButton, taskContent, starButton);
 	return item;
