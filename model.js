@@ -6,7 +6,7 @@ window.model = {
       ],
       taskId : 1,
       msg: '',
-      filter: 'all'
+      filter: 'All'
     },
     TOKEN: 'TodoMVC'
 }

@@ -40,7 +40,7 @@ window.onload = function () {
 		"click",
 		function () {
 			addTask();
-			toggleInput()
+			toggleInput();
 			todo.value = "";
 			deadlineInput.value = "";
 		},
@@ -50,7 +50,7 @@ window.onload = function () {
 	cancel.addEventListener(
 		"click",
 		function () {
-			toggleInput()
+			toggleInput();
 			todo.value = "";
 			deadlineInput.value = "";
 			update();
@@ -64,7 +64,7 @@ window.onload = function () {
 	todo.addEventListener("keyup", function (event) {
 		if (event.keyCode != 13) return;
 		addTask();
-		toggleInput()
+		toggleInput();
 		todo.value = "";
 		deadlineInput.value = "";
 	});
@@ -112,29 +112,25 @@ window.onload = function () {
 			node.classList.add("theme-color2");
 		});
 	});
-	$("#switch-all").addEventListener("click", function () {
-		model.data.filter = "all";
-		$("#title").innerHTML = "Tasks";
-		update();
-	});
+	this.$All(".switch-list").forEach(function (item) {
+		item.addEventListener("click", function () {
+			model.data.filter = this.innerText;
+			$("#title").innerHTML = this.innerText;
 
-	$("#switch-starred").addEventListener("click", function () {
-		model.data.filter = "starred";
-		$("#title").innerHTML = "Important";
-		update();
-	});
-	$("#switch-scheduled").addEventListener("click", function () {
-		model.data.filter = "scheduled";
-		$("#title").innerHTML = "Scheduled";
-		update();
-	});
-	$("#switch-finished").addEventListener("click", function () {
-		model.data.filter = "finished";
-		$("#title").innerHTML = "Finished";
-		$(".finished-header").classList.toggle("hidden");
-		$("#add").classList.toggle("hidden");
-		$("#count").classList.toggle("hidden")
-		update();
+			if (this.innerText == "Finished") {
+				$(".finished-header").classList.toggle("hidden");
+				$("#add").classList.toggle("hidden");
+				$("#count").classList.toggle("hidden");
+			} else {
+				//如果添加按钮被隐藏，则相关元素全部打开
+				if ($("#add").classList.contains("hidden")) {
+					$(".finished-header").classList.toggle("hidden");
+					$("#add").classList.toggle("hidden");
+					$("#count").classList.toggle("hidden");
+				}
+			}
+			update();
+		});
 	});
 
 	this.update();
@@ -160,30 +156,26 @@ function toggleFinished() {
 function update() {
 	model.flush();
 	var data = model.data;
-	var items =data.items;
+	var items = data.items;
 	activeCount = 0;
-
 
 	taskList = $("#tasks-list");
 	finishedTaskList = $("#finished-tasks-list");
 	taskList.innerHTML = "";
 	finishedTaskList.innerHTML = "";
 
-	
-	if(data.filter == "starred") {
+	if (data.filter == "Starred") {
 		items = data.items.filter(function (task) {
 			return task.starred;
-		})
-	}
-	else if(data.filter == "scheduled") {
+		});
+	} else if (data.filter == "Scheduled") {
 		items = data.items.filter(function (task) {
 			return task.deadline != "";
-		})
-	}
-	else if (data.filter == "finished") {
+		});
+	} else if (data.filter == "Finished") {
 		items = data.items.filter(function (task) {
 			return task.finished;
-		})
+		});
 	}
 	//显示当前类别剩下的
 	items.forEach(function (item) {
