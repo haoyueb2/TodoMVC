@@ -166,11 +166,11 @@ function update() {
 	taskList.innerHTML = "";
 	finishedTaskList.innerHTML = "";
 
-	if (data.filter == "Starred") {
+	if (data.filter == "Important") {
 		items = data.items.filter(function (task) {
 			return task.starred;
 		});
-	} else if (data.filter == "Scheduled") {
+	} else if (data.filter == "Planned") {
 		items = data.items.filter(function (task) {
 			return task.deadline != "";
 		});
@@ -179,6 +179,17 @@ function update() {
 			return task.finished;
 		});
 	}
+	//按照id排序
+	items.sort(function (x, y) {
+		if (x.taskId < y.taskId) {
+			return -1;
+		}
+		if (x.taskId > y.taskId) {
+			return 1;
+		}
+		return 0;
+	});
+
 	//显示当前类别剩下的
 	items.forEach(function (item) {
 		if (!item.finished) ++activeCount;
@@ -280,6 +291,7 @@ function createListItem(taskObj) {
 
 	var del = false;
 	var offset;
+	var verticalOffset;
 	// 滑动事件绑定
 	item.addEventListener(
 		"touchstart",
@@ -294,16 +306,22 @@ function createListItem(taskObj) {
 	item.addEventListener(
 		"touchmove",
 		function (event) {
+			// console.log(event.currentTarget);
 			var newTouch = event.touches[0];
 			offset = newTouch.clientX - oldTouch.clientX;
-			// touchDom.style.transition = "all 0.2s";
-			touchDom.style.left = offset + "px";
-			if (Math.abs(offset) >= deviceWidth / 2.5) {
-				del = true;
-				touchDom.style.backgroundColor = "red";
+			verticalOffset = newTouch.clientY - oldTouch.clientY;
+
+			if (Math.abs(verticalOffset) > 50) {
+				touchDom.style.backgroundColor = "transparent";
 			} else {
-				del = false;
-				touchDom.style.backgroundColor = "white";
+				touchDom.style.left = offset + "px";
+				if (Math.abs(offset) >= deviceWidth / 2.5) {
+					del = true;
+					touchDom.style.backgroundColor = "red";
+				} else {
+					del = false;
+					touchDom.style.backgroundColor = "white";
+				}
 			}
 		},
 		false
@@ -311,17 +329,42 @@ function createListItem(taskObj) {
 	item.addEventListener(
 		"touchend",
 		function (event) {
+			if (Math.abs(verticalOffset) > 50) {
+				var myLocation = event.changedTouches[0];
+
+				var realTarget = document.elementFromPoint(
+					myLocation.clientX,
+					myLocation.clientY
+				);
+				var originItem;
+				var targetItem;
+
+				try {
+					if (realTarget.nodeName == "LABEL") {
+						realTarget = realTarget.parentNode.parentNode;
+					}
+					console.log(touchDom, realTarget);
+					originItem = getDataItemById(touchDom.id);
+					targetItem = getDataItemById(realTarget.id);
+					var temp = originItem.taskId;
+					originItem.taskId = targetItem.taskId;
+					targetItem.taskId = temp;
+					realTarget.style.backgroundColor = "transparent";
+				} catch (e) {
+					console.log(e);
+				}
+			}
 			if (!del) {
 				touchDom.style.left = 0;
-			}
-			else{
+			} else {
 				for (var i = 0; i < model.data.items.length; i++) {
 					if (model.data.items[i].taskId == Number(touchDom.id)) {
 						model.data.items.splice(i, 1);
 					}
 				}
-				update();
 			}
+			setTimeout(update,100)
+			// update();
 			touchDom = null;
 			oldTouch = null;
 		},
@@ -331,7 +374,11 @@ function createListItem(taskObj) {
 	item.append(checkButton, taskContent, starButton);
 	return item;
 }
-
+function getDataItemById(id) {
+	return model.data.items.filter(function (item) {
+		return item.taskId == id;
+	})[0];
+}
 function addTask() {
 	var todo = $("#todo");
 	var deadlineInput = $("#deadline-input");

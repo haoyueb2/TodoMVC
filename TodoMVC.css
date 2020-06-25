@@ -17,9 +17,7 @@ body {
 	overflow-y: scroll;
 	width: 100%;
 }
-.theme-color {
-	background-color: rgb(67, 92, 235);
-}
+
 .theme-color2 {
 	background-color: #4eb1eb;;
 }
@@ -38,6 +36,9 @@ button {
 	font: inherit;
 	vertical-align: baseline;
 }
+.theme-color {
+	background-color: rgb(67, 92, 235);
+}
 /* 参考 */
 .task-list-item {
 	/* margin: 0rem 1rem; */
@@ -53,6 +54,7 @@ button {
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 	/* display: inline-block; */
 	overflow: hidden;
+	/* z-index: 97; */
 }
 .task-list-item i{
 	font-size: 20px;
