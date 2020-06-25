@@ -326,9 +326,9 @@ function createListItem(taskObj) {
 	starButton.type = "button";
 	starButton.className = "task-list-item_star-button";
 	if (!taskObj.starred) {
-		starButton.innerHTML = "<i class='far fa-star gray'></i>";
+		starButton.innerHTML = "<i class='far fa-star'></i>";
 	} else {
-		starButton.innerHTML = "<i class='fas fa-star'></i>";
+		starButton.innerHTML = "<i class='fa fa-star'></i>";
 	}
 
 	starButton.addEventListener("click", function (event) {

@@ -117,6 +117,10 @@ button {
 
 }
 
+/* .starred i {
+ color:yellow;
+} */
+
 .finished-header {
 	display: flex;
 	margin: 0rem 1.07rem;
@@ -318,3 +322,22 @@ header h1 {
 .added-myDay i{
 	color : rgb(16, 123, 247);
 }
+.switch-list span{
+	margin-left:1em;
+}
+#switch-important i{
+	color: rgb(148, 18, 18);
+}
+#switch-myDay i{
+	color: rgb(0, 204, 255);
+}
+#switch-planned i{
+	color: rgb(1, 121, 1);
+}
+#switch-all i{
+	color: rgb(121, 49, 1);
+}
+#switch-finished i{
+	color: rgb(197, 154, 12);
+}
+
