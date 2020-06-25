@@ -26,7 +26,8 @@ window.onload = function () {
 	var toggleAll = $("#toggle-all");
 	var deleteFinished = $("#delete-finished");
 	var deadlineInput = $("#deadline-input");
-
+	finishedHeader.addEventListener("click", toggleFinished);
+	//输入编辑相关注册
 	addBtn.addEventListener(
 		"click",
 		function () {
@@ -59,9 +60,6 @@ window.onload = function () {
 		},
 		false
 	);
-	dropdownbtn.addEventListener("click", function () {
-		$("#dropdown-content").classList.toggle("hidden");
-	});
 
 	todo.addEventListener("keyup", function (event) {
 		if (event.keyCode != 13) return;
@@ -71,8 +69,10 @@ window.onload = function () {
 		deadlineInput.value = "";
 	});
 
-	finishedHeader.addEventListener("click", toggleFinished);
-	//全部完成的取消需要保存上一轮的完成吗？
+	//下拉菜单注册
+	dropdownbtn.addEventListener("click", function () {
+		$("#dropdown-content").classList.toggle("hidden");
+	});
 	toggleAll.addEventListener("click", function () {
 		if (activeCount != 0) {
 			model.data.items.forEach(function (task) {
@@ -83,7 +83,7 @@ window.onload = function () {
 				task.finished = false;
 			});
 		}
-
+		$("#dropdown-content").classList.toggle("hidden");
 		update();
 	});
 
@@ -99,14 +99,43 @@ window.onload = function () {
 				});
 				update();
 			});
+			$("#dropdown-content").classList.toggle("hidden");
 	});
+	$("#sort-deadline").addEventListener("click", function () {
+		model.data.items.sort(function (x, y) {
+			//返回小于0，x在前,目的是使有日期的和日期早的排后边
+			if (x.deadline == "" && y.deadline != "") {
+				return -1;
+			} else if (x.deadline != "" && y.deadline == "") {
+				return 1;
+			} else if (x.deadline == "" && y.deadline == "") {
+				return 0;
+			} else {
+				// 火狐不能直接解析-风格的日期
+				date_x = Date.parse(x.deadline.replace(/\-/g, "/"));
+				date_y = Date.parse(y.deadline.replace(/\-/g, "/"));
+				return date_y-date_x;
+			}
+		});
+		model.data.priority =1;
+		model.data.items.forEach(function(item) {
+			// item.priority = model.data.priority;
+			item.priority = model.data.priority;
+			model.data.priority++;
+
+		});
+		$("#dropdown-content").classList.toggle("hidden");
+		// console.log(items);
+		update();
+	});
+	$("#sort-creation").addEventListener("click", function () {});
+	//侧栏菜单注册
 	$("#menubtn").addEventListener("click", function () {
 		$("#menu").classList.toggle("hidden");
 	});
 	this.$("#menu").addEventListener("click", function () {
 		$("#menu").classList.toggle("hidden");
 	});
-
 	this.$("#theme1").addEventListener("click", function () {
 		var nodelist = $All(".theme-color");
 		nodelist.forEach(function (node) {
@@ -179,13 +208,13 @@ function update() {
 			return task.finished;
 		});
 	}
-	//按照id排序
+	//按照priority排序，大的在前边
 	items.sort(function (x, y) {
 		if (x.priority < y.priority) {
-			return -1;
+			return 1;
 		}
 		if (x.priority > y.priority) {
-			return 1;
+			return -1;
 		}
 		return 0;
 	});
@@ -201,18 +230,14 @@ function update() {
 			return !task.finished;
 		})
 		.forEach(function (task) {
-			// 保持最新在前
-			taskList.insertBefore(createListItem(task), taskList.firstChild);
+			taskList.append(createListItem(task));
 		});
 	items
 		.filter(function (task) {
 			return task.finished;
 		})
 		.forEach(function (task) {
-			finishedTaskList.insertBefore(
-				createListItem(task),
-				finishedTaskList.firstChild
-			);
+			finishedTaskList.append(createListItem(task));
 		});
 }
 
@@ -264,20 +289,27 @@ function createListItem(taskObj) {
 
 	starButton.addEventListener("click", function (event) {
 		taskObj.starred = !taskObj.starred;
+		// 如果star，优先度置于最高，置顶
+		if (taskObj.starred) {
+			taskObj.priority = model.data.priority;
+			model.data.priority++;
+		}
+
 		update();
 		event.stopPropagation();
 	});
 
 	item.addEventListener("click", function (event) {
 		id = Number(this.id);
-		var currentItem = model.data.items.filter(function (item) {
-			return item.taskId == id;
-		})[0];
+		var currentItem = getDataItemById(id);
 		// console.log(currentItem);
 
 		$("#todo").value = currentItem.msg;
 		$("#deadline-input").value = currentItem.deadline;
-		toggleInput();
+		if ($("#out-model").classList.contains("hidden")) {
+			toggleInput();
+		}
+
 		isEdit = true;
 		// 自动弹出软键盘
 		editId = id;
@@ -312,6 +344,7 @@ function createListItem(taskObj) {
 			verticalOffset = newTouch.clientY - oldTouch.clientY;
 
 			if (Math.abs(verticalOffset) > 50) {
+				del = false;
 				touchDom.style.backgroundColor = "transparent";
 			} else {
 				touchDom.style.left = offset + "px";
@@ -363,7 +396,7 @@ function createListItem(taskObj) {
 					}
 				}
 			}
-			setTimeout(update,100)
+			setTimeout(update, 100);
 			// update();
 			touchDom = null;
 			oldTouch = null;
