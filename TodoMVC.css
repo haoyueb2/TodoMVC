@@ -312,3 +312,9 @@ header h1 {
 	border-radius: 8px;
 	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
+.added-myDay {
+	color : rgb(16, 123, 247);
+}
+.added-myDay i{
+	color : rgb(16, 123, 247);
+}

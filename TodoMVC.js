@@ -14,6 +14,21 @@ function toggleInput() {
 	$("#add").classList.toggle("hidden");
 	$("#out-model").classList.toggle("hidden");
 }
+function addToMyDay(isOpen) {
+	if(isOpen) {
+		if(!$("#add-myDay").classList.contains("added-myDay")) {
+			// console.log($("#add-myDay").childNodes[1])
+			$("#add-myDay").innerHTML = "<i class='fa fa-sun-o'></i>Added to My Day";
+			$("#add-myDay").classList.toggle("added-myDay");
+		}
+	}
+	else {
+		if($("#add-myDay").classList.contains("added-myDay")) {
+			$("#add-myDay").innerHTML = "<i class='fa fa-sun-o'></i>Add to My Day";
+			$("#add-myDay").classList.toggle("added-myDay");
+		}
+	}
+}
 window.onload = function () {
 	model.init();
 	var addBtn = $("#add");
@@ -27,6 +42,7 @@ window.onload = function () {
 	var deleteFinished = $("#delete-finished");
 	var deadlineInput = $("#deadline-input");
 	finishedHeader.addEventListener("click", toggleFinished);
+
 	//输入编辑相关注册
 	addBtn.addEventListener(
 		"click",
@@ -46,6 +62,7 @@ window.onload = function () {
 			toggleInput();
 			todo.value = "";
 			deadlineInput.value = "";
+			addToMyDay(false);
 		},
 		false
 	);
@@ -56,6 +73,7 @@ window.onload = function () {
 			toggleInput();
 			todo.value = "";
 			deadlineInput.value = "";
+			addToMyDay(false);
 			update();
 		},
 		false
@@ -67,6 +85,11 @@ window.onload = function () {
 		toggleInput();
 		todo.value = "";
 		deadlineInput.value = "";
+		addToMyDay(false);
+	});
+
+	$("#add-myDay").addEventListener("click",function() {
+		$("#add-myDay").classList.toggle("added-myDay");
 	});
 
 	//下拉菜单注册
@@ -101,6 +124,7 @@ window.onload = function () {
 			});
 			$("#dropdown-content").classList.toggle("hidden");
 	});
+	
 	$("#sort-deadline").addEventListener("click", function () {
 		model.data.items.sort(function (x, y) {
 			//返回小于0，x在前,目的是使有日期的和日期早的排后边
@@ -115,7 +139,7 @@ window.onload = function () {
 				date_x = Date.parse(x.deadline.replace(/\-/g, "/"));
 				date_y = Date.parse(y.deadline.replace(/\-/g, "/"));
 				return date_y-date_x;
-			}
+			}	
 		});
 		model.data.priority =1;
 		model.data.items.forEach(function(item) {
@@ -128,6 +152,7 @@ window.onload = function () {
 		// console.log(items);
 		update();
 	});
+
 	$("#sort-creation").addEventListener("click", function () {
 		model.data.items.sort(function (x, y) {
 			//返回小于0，x在前,目的是使id大的在后边
@@ -143,6 +168,7 @@ window.onload = function () {
 		$("#dropdown-content").classList.toggle("hidden");
 		update();
 	});
+
 	//侧栏菜单注册
 	$("#menubtn").addEventListener("click", function () {
 		$("#menu").classList.toggle("hidden");
@@ -220,6 +246,10 @@ function update() {
 	} else if (data.filter == "Finished") {
 		items = data.items.filter(function (task) {
 			return task.finished;
+		});
+	} else if(data.filter == "My Day") {
+		items = data.items.filter(function (task) {
+			return task.myDay;
 		});
 	}
 	//按照priority排序，大的在前边
@@ -317,13 +347,12 @@ function createListItem(taskObj) {
 		id = Number(this.id);
 		var currentItem = getDataItemById(id);
 		// console.log(currentItem);
-
 		$("#todo").value = currentItem.msg;
 		$("#deadline-input").value = currentItem.deadline;
+		addToMyDay(currentItem.myDay);
 		if ($("#out-model").classList.contains("hidden")) {
 			toggleInput();
 		}
-
 		isEdit = true;
 		// 自动弹出软键盘
 		editId = id;
@@ -434,7 +463,8 @@ function addTask() {
 	var deadline = deadlineInput.value;
 	var taskId = data.taskId;
 	var priority = data.priority;
-	// console.log(deadline);
+	var myDay = $("#add-myDay").classList.contains("added-myDay");
+
 	if (msg == "") {
 		console.warn("msg is empty");
 		alert("please input your todo");
@@ -446,6 +476,7 @@ function addTask() {
 			priority: priority,
 			msg: msg,
 			deadline: deadline,
+			myDay: myDay,
 			finished: false,
 			starred: false
 		});
@@ -457,6 +488,7 @@ function addTask() {
 		})[0];
 		currentItem.msg = msg;
 		currentItem.deadline = deadline;
+		currentItem.myDay = myDay;
 	}
 
 	update();
