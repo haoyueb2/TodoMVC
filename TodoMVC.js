@@ -128,7 +128,21 @@ window.onload = function () {
 		// console.log(items);
 		update();
 	});
-	$("#sort-creation").addEventListener("click", function () {});
+	$("#sort-creation").addEventListener("click", function () {
+		model.data.items.sort(function (x, y) {
+			//返回小于0，x在前,目的是使id大的在后边
+			return x.taskId - y.taskId;
+
+		});
+		model.data.priority =1;
+		model.data.items.forEach(function(item) {
+			item.priority = model.data.priority;
+			model.data.priority++;
+
+		});
+		$("#dropdown-content").classList.toggle("hidden");
+		update();
+	});
 	//侧栏菜单注册
 	$("#menubtn").addEventListener("click", function () {
 		$("#menu").classList.toggle("hidden");
