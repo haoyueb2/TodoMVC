@@ -5,6 +5,7 @@ window.model = {
         // {msg:'', completed: false}
       ],
       taskId : 1,
+      priority: 1,
       msg: '',
       filter: 'All'
     },

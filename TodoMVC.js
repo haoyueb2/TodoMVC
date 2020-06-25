@@ -181,10 +181,10 @@ function update() {
 	}
 	//按照id排序
 	items.sort(function (x, y) {
-		if (x.taskId < y.taskId) {
+		if (x.priority < y.priority) {
 			return -1;
 		}
-		if (x.taskId > y.taskId) {
+		if (x.priority > y.priority) {
 			return 1;
 		}
 		return 0;
@@ -338,7 +338,7 @@ function createListItem(taskObj) {
 				);
 				var originItem;
 				var targetItem;
-
+				//防止拖动位置不在item上
 				try {
 					if (realTarget.nodeName == "LABEL") {
 						realTarget = realTarget.parentNode.parentNode;
@@ -346,9 +346,9 @@ function createListItem(taskObj) {
 					console.log(touchDom, realTarget);
 					originItem = getDataItemById(touchDom.id);
 					targetItem = getDataItemById(realTarget.id);
-					var temp = originItem.taskId;
-					originItem.taskId = targetItem.taskId;
-					targetItem.taskId = temp;
+					var temp = originItem.priority;
+					originItem.priority = targetItem.priority;
+					targetItem.priority = temp;
 					realTarget.style.backgroundColor = "transparent";
 				} catch (e) {
 					console.log(e);
@@ -386,6 +386,7 @@ function addTask() {
 	var data = model.data;
 	var deadline = deadlineInput.value;
 	var taskId = data.taskId;
+	var priority = data.priority;
 	// console.log(deadline);
 	if (msg == "") {
 		console.warn("msg is empty");
@@ -395,12 +396,14 @@ function addTask() {
 	if (!isEdit) {
 		data.items.push({
 			taskId: taskId,
+			priority: priority,
 			msg: msg,
 			deadline: deadline,
 			finished: false,
 			starred: false
 		});
 		data.taskId++;
+		data.priority++;
 	} else {
 		var currentItem = model.data.items.filter(function (item) {
 			return item.taskId == editId;
