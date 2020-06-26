@@ -482,7 +482,6 @@ function createListItem(taskObj) {
 					if (realTarget.nodeName == "LABEL") {
 						realTarget = realTarget.parentNode.parentNode;
 					}
-					console.log(touchDom, realTarget);
 					originItem = getDataItemById(touchDom.id);
 					targetItem = getDataItemById(realTarget.id);
 					var temp = originItem.priority;
