@@ -184,7 +184,10 @@ window.onload = function () {
 		$("#menu").classList.toggle("hidden");
 	});
 	this.$("#menu").addEventListener("click", function () {
-		$("#menu").classList.toggle("hidden");
+		setTimeout(function() {
+			$("#menu").classList.toggle("hidden");
+		},100);
+		
 	});
 	var objToday = new Date(),
 	weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),

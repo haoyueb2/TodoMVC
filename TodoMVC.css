@@ -64,17 +64,17 @@ button {
 /* .task-list-item:hover,
 .task-list-item:hover > button {
 	background-color: #ededed;
-}
+} */
 
-.task-list-item:visited,
+/* .task-list-item:visited,
 .task-list-item:visited > button {
 	background-color: #f4f6ff;
-}
+} */
 
 .task-list-item:active,
 .task-list-item:active > button {
 	background-color: #f4f6ff;
-} */
+}
 
 
 
@@ -310,7 +310,7 @@ header h1 {
 	height: 100%;
 	background-color: white;
 	z-index: 102;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.2);
 }
 #menu-list {
 	padding:0px;
@@ -321,11 +321,15 @@ header h1 {
 
 	/* background-color: white; */
 	position: relative;
-	margin: 5px 12px;
+	padding: 5px 12px;
+	margin-right: 10px;
 	font-size: 25px;
 	list-style: none;
 	border-radius: 8px;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	/* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); */
+}
+.switch-list:active {
+	background-color: #f4f6ff;
 }
 .added-myDay {
 	color : rgb(16, 123, 247);
