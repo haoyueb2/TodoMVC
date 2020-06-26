@@ -369,7 +369,6 @@ function createListItem(taskObj) {
 		if(todayUnix > deadlineUnix) {
 			taskDeadline.className = "task-deadline out-dated";
 		}
-
 	}
 
 	var taskMyDay = document.createElement("span");
