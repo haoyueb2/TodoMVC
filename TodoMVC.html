@@ -35,17 +35,15 @@
 					<button id="delete-finished">Clear Finished</button>
 					<button id="sort-deadline">Sory by deadline</button>
 					<button id="sort-creation">Sory by creation date</button>
-					<!-- <button id="display-finished">显示/隐藏已完成</button> -->
+					<button id="toggle-finished">Toggle finished</button>
 				</div>
 			</div>
 		</header>
-		<!-- <input type="text" id="todo" placeholder="to do something" autofocus /> -->
 		<section id="main">
 			<section class="tasks-list_container">
 				<span id="count"></span>
 				<ul id="tasks-list"></ul>
 			</section>
-			<!-- 可以考虑没有finished时把这里全部隐藏 -->
 			<section class="finished-tasks-list_container">
 				<div class="finished-header">
 					<button type="button" class="icon">
@@ -63,11 +61,9 @@
 		</section>
 
 		<div id="menu" class="hidden">
-			<!-- 改为今日时间 -->
 			<h2 id="menu-title"></h2>
 			<button id="switch-search"><i class="fa fa-search"></i></button>
 			<ul id="menu-list">
-				<!-- Todo：待加入今天 -->
 				<li id="switch-all" class="switch-list"><i class="fa fa-list" ></i><span>All</span></li>
 				<li id="switch-myDay" class="switch-list"><i class='fa fa-sun-o'></i><span>My Day</span></li>
 				<li id="switch-important" class="switch-list"><i class="fa fa-star"></i><span>Important</span></li>

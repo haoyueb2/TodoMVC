@@ -116,7 +116,7 @@ window.onload = function () {
 				task.finished = false;
 			});
 		}
-		$("#dropdown-content").classList.toggle("hidden");
+		hideDom($("#dropdown-content"));
 		update();
 	});
 
@@ -132,7 +132,7 @@ window.onload = function () {
 				});
 				update();
 			});
-			$("#dropdown-content").classList.toggle("hidden");
+			hideDom($("#dropdown-content"));
 	});
 	
 	$("#sort-deadline").addEventListener("click", function () {
@@ -145,7 +145,7 @@ window.onload = function () {
 			} else if (x.deadline == "" && y.deadline == "") {
 				return 0;
 			} else {
-				// 火狐不能直接解析-风格的日期
+				// 火狐不能直接解析-分割的日期
 				date_x = Date.parse(x.deadline.replace(/\-/g, "/"));
 				date_y = Date.parse(y.deadline.replace(/\-/g, "/"));
 				return date_y-date_x;
@@ -158,7 +158,7 @@ window.onload = function () {
 			model.data.priority++;
 
 		});
-		$("#dropdown-content").classList.toggle("hidden");
+		hideDom($("#dropdown-content"));
 		// console.log(items);
 		update();
 	});
@@ -175,17 +175,22 @@ window.onload = function () {
 			model.data.priority++;
 
 		});
-		$("#dropdown-content").classList.toggle("hidden");
+		hideDom($("#dropdown-content"));
 		update();
 	});
 
+	$("#toggle-finished").addEventListener("click",function() {
+		$(".finished-tasks-list_container").classList.toggle("hidden");
+		hideDom($("#dropdown-content"));
+	})
 	//侧栏菜单注册
 	$("#menubtn").addEventListener("click", function () {
-		$("#menu").classList.toggle("hidden");
+		
+		displayDom($("#menu"));
 	});
 	this.$("#menu").addEventListener("click", function () {
 		setTimeout(function() {
-			$("#menu").classList.toggle("hidden");
+			hideDom($("#menu"));
 		},100);
 		
 	});
@@ -216,9 +221,9 @@ window.onload = function () {
 			$("#title").innerHTML = this.innerText;
 
 			if (this.innerText == "Finished") {
-				$(".finished-header").classList.toggle("hidden");
-				$("#add").classList.toggle("hidden");
-				$("#count").classList.toggle("hidden");
+				hideDom($(".finished-header"));
+				hideDom($("#add"));
+				hideDom($("#count"));
 			} else {
 				displayDom($("#add"));
 				displayDom($(".finished-header"));
@@ -232,16 +237,9 @@ window.onload = function () {
 	});
 	this.$("#switch-search").addEventListener("click",function () {
 		model.data.filter = "Search";
-		// $("#title").classList.toggle("hidden");
-		// $("#search").classList.toggle("hidden");
 		hideDom($("#title"));
 		displayDom($("#search"));
-		// console.log(this.innerText =="");
-		// if(!$("#add").classList.contains("hidden")) {
-		// 	$("#add").classList.toggle("hidden");
-		// }
 		hideDom($("#add"));
-		
 		});
 
 	this.$("#search-submit").addEventListener("click",function() {
