@@ -25,16 +25,7 @@ body {
 	color:white;
 	margin-left: 1em;
 }
-/* 覆盖默认样式 */
-button {
-	background-color: transparent;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
+
 
 /* 参考 */
 .task-list-item {
@@ -52,6 +43,16 @@ button {
 	/* display: inline-block; */
 	overflow: hidden;
 	/* z-index: 97; */
+}
+/* 覆盖默认样式 */
+button {
+	background-color: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
 .task-list-item i{
 	font-size: 20px;
@@ -105,12 +106,14 @@ button {
 	float: left;
 }
 .tasks-list-item_check-button i{
+	background-color: transparent;
 	font-size: 25px;
 }
 .task-list-item_star-button,.submit-button {
 	float: right;
 }
 .task-list-item_star-button i,.submit-button i{
+	background-color: transparent;
 	font-size: 25px;
 }
 /* .starred i {

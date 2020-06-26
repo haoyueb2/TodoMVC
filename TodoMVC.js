@@ -428,32 +428,55 @@ function createListItem(taskObj) {
 	var touchDom;
 
 	var del = false;
+	var sort = false;
+	// 上下排序计时器
+	var longTapTimer;
 	var offset;
 	var verticalOffset;
 	// 滑动事件绑定
 	item.addEventListener(
 		"touchstart",
 		function (event) {
+			// console.log("touchstart");
 			oldTouch = event.touches[0];
 			touchDom = event.currentTarget;
 			// console.log(touchDom)
+			longTapTimer = setTimeout(function () {
+				//太早touchend的话会将touchdom置空
+				try{
+					touchDom.style.backgroundColor = "transparent";
+				}
+				catch (e){
+					console.log(e,touchDom);
+
+				}
+				sort = true;
+			}, 700);
 		},
 		false
 	);
-	// 左右滑删除
+	// 左右滑删除，上下滑动排序
 	item.addEventListener(
 		"touchmove",
 		function (event) {
-			// console.log(event.currentTarget);
+			console.log("touchmove");
 			var newTouch = event.touches[0];
 			offset = newTouch.clientX - oldTouch.clientX;
 			verticalOffset = newTouch.clientY - oldTouch.clientY;
+			//考虑手指的微小移动
+			if((Math.abs(offset) > 15 || Math.abs(verticalOffset) > 15) && longTapTimer != null){
+				clearTimeout(longTapTimer);
+				longTapTimer = null;
+			}
 
-			if (Math.abs(verticalOffset) > 50) {
+			if (sort) {
 				del = false;
 				touchDom.style.backgroundColor = "transparent";
 			} else {
-				touchDom.style.left = offset + "px";
+				if (Math.abs(offset) > 30){
+					touchDom.style.left = offset + "px";
+				} 
+				
 				if (Math.abs(offset) >= deviceWidth / 2.5) {
 					del = true;
 					touchDom.style.backgroundColor = "red";
@@ -468,7 +491,11 @@ function createListItem(taskObj) {
 	item.addEventListener(
 		"touchend",
 		function (event) {
-			if (Math.abs(verticalOffset) > 50) {
+			if(longTapTimer != null){
+				clearTimeout(longTapTimer);
+				longTapTimer = null;
+			}
+			if (Math.abs(verticalOffset) > 50 && sort) {
 				var myLocation = event.changedTouches[0];
 
 				var realTarget = document.elementFromPoint(
