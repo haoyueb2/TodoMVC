@@ -56,21 +56,6 @@ button {
 .task-list-item i{
 	font-size: 20px;
 }
-/* submit还是加卡片好看 */
-/* .submit-item {
-    border: none;
-    box-shadow: none;
-} */
-/* .task-list-item:hover,
-.task-list-item:hover > button {
-	background-color: #ededed;
-} */
-
-/* .task-list-item:visited,
-.task-list-item:visited > button {
-	background-color: #f4f6ff;
-} */
-
 .task-list-item:active,
 .task-list-item:active > button {
 	background-color: #f4f6ff;
@@ -117,11 +102,11 @@ button {
 	padding-right: 2em; */
 }
 .tasks-list-item_check-button {
-	/* margin-left: 1rem; */
 	float: left;
-	
 }
-
+.tasks-list-item_check-button i{
+	font-size: 25px;
+}
 .task-list-item_star-button,.submit-button {
 	float: right;
 }
@@ -241,8 +226,6 @@ header h1 {
 	/* animation: fadeIn 1.5s linear; */
 }
 
-
-
 #new #choose {
 	text-align: right;
 	margin: 0em;
@@ -253,7 +236,12 @@ header h1 {
 #new #choose button {
 	margin: 0 10px;
 }
-
+#todo {
+	width: 70%;
+	margin-left: 12px;
+	font-size: 20px;
+	color: #555;
+}
 
 
 
@@ -374,7 +362,7 @@ header h1 {
 	margin-left: 1em;
 }
 #search {
-	width: 80%;
+	width: 70%;
 	/* float: left; */
 	position: relative;
 	overflow: hidden;
