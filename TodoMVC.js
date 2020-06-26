@@ -529,6 +529,22 @@ function addTask() {
 	var taskId = data.taskId;
 	var priority = data.priority;
 	var myDay = $("#add-myDay").classList.contains("added-myDay");
+	//在Important列表添加时，自动加入重要属性
+	var starred = data.filter == "Important";
+	//在Planned列表添加时，如果未设置截止日期，自动设为今天
+	if(data.filter =="Planned" && deadline =="") {
+		d = new Date();
+		//补零
+		var month = String(d.getMonth()+1).padStart(2,'0');
+		var date = String(d.getDate()).padStart(2,'0');
+		today = d.getFullYear()+"-"+month+"-"+date;
+		deadline = today;
+	}
+	//在My Day列表添加时，如果未设置我的一天，自动设为My Day
+	if(data.filter=="My Day") {
+		myDay = true;
+	}
+
 
 	if (msg == "") {
 		console.warn("msg is empty");
@@ -543,7 +559,7 @@ function addTask() {
 			deadline: deadline,
 			myDay: myDay,
 			finished: false,
-			starred: false
+			starred: starred
 		});
 		data.taskId++;
 		data.priority++;
