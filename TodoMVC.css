@@ -237,7 +237,11 @@ header h1 {
 }
 
 #new #choose button {
-	margin: 0 10px;
+	margin: 0px 10px;
+}
+#cancel {
+	padding: 10px 10px;
+	/* font-size: 30px; */
 }
 #todo {
 	width: 70%;
@@ -334,6 +338,7 @@ header h1 {
 	margin-left:1em;
 }
 #menu-title {
+	font-size: larger;
 	display:inline-block;
 	margin-left: 10px;
 	margin-bottom: 0;
