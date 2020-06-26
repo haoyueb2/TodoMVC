@@ -341,9 +341,9 @@ function createListItem(taskObj) {
 	checkButton.type = "button";
 	checkButton.className = "tasks-list-item_check-button";
 	if (!taskObj.finished) {
-		checkButton.innerHTML = "<i class='far fa-circle'></i>";
+		checkButton.innerHTML = "<i class='fa fa-circle-o'></i>";
 	} else {
-		checkButton.innerHTML = "<i class='fas fa-check-circle'></i>";
+		checkButton.innerHTML = "<i class='fa fa-check-circle'></i>";
 	}
 
 	checkButton.addEventListener("click", function (event) {
@@ -389,7 +389,7 @@ function createListItem(taskObj) {
 	starButton.type = "button";
 	starButton.className = "task-list-item_star-button";
 	if (!taskObj.starred) {
-		starButton.innerHTML = "<i class='far fa-star'></i>";
+		starButton.innerHTML = "<i class='fa fa-star-o'></i>";
 	} else {
 		starButton.innerHTML = "<i class='fa fa-star'></i>";
 	}

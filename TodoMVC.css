@@ -119,15 +119,15 @@ button {
 .tasks-list-item_check-button {
 	/* margin-left: 1rem; */
 	float: left;
-
+	
 }
+
 .task-list-item_star-button,.submit-button {
 	float: right;
-	/* text-align: center;
-	height: 100%; */
-
 }
-
+.task-list-item_star-button i,.submit-button i{
+	font-size: 25px;
+}
 /* .starred i {
  color:yellow;
 } */
@@ -292,6 +292,7 @@ header h1 {
 	display: block;
 	font-size: large;
 	padding: 8px;
+	width: 100%;
 }
 #menubtn {
 	float : left;
