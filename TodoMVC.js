@@ -176,13 +176,17 @@ window.onload = function () {
 	this.$("#menu").addEventListener("click", function () {
 		$("#menu").classList.toggle("hidden");
 	});
-	this.$("#theme1").addEventListener("click", function () {
-		var nodelist = $All(".theme-color");
-		nodelist.forEach(function (node) {
-			node.classList.remove("theme-color");
-			node.classList.add("theme-color2");
-		});
-	});
+
+	$("#toggle-theme").addEventListener("click",function(e) {
+		$("#theme-list").classList.toggle("hidden");
+		e.stopPropagation();
+	})
+	this.$All(".switch-theme").forEach(function (item) {
+		item.addEventListener("click",function() {
+			// console.log(window.getComputedStyle(item).backgroundColor);
+			document.body.style.backgroundColor = window.getComputedStyle(item).backgroundColor;
+		})
+	})
 	this.$All(".switch-list").forEach(function (item) {
 		item.addEventListener("click", function () {
 			model.data.filter = this.innerText;
