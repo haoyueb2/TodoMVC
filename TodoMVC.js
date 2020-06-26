@@ -200,12 +200,33 @@ window.onload = function () {
 					$("#count").classList.toggle("hidden");
 				}
 			}
+
+			if($("#title").classList.contains("hidden")) {
+				$("#title").classList.toggle("hidden");
+				$("#search").classList.toggle("hidden");
+			}
+			$("#search-input").value="";
 			update();
 		});
 	});
+	this.$("#switch-search").addEventListener("click",function () {
+		model.data.filter = "Search";
+		$("#title").classList.toggle("hidden");
+		$("#search").classList.toggle("hidden");
+		// console.log(this.innerText =="");
+		if(!$("#add").classList.contains("hidden")) {
+			$("#add").classList.toggle("hidden");
+		}
+		
+		});
 
+	this.$("#search-submit").addEventListener("click",function() {
+		// console.log("submit")
+		update();
+	})
 	this.update();
 };
+
 function toggleFinished() {
 	var finishedHeader = $(".finished-header");
 	var chevronIcon = finishedHeader.querySelector("i");
@@ -250,6 +271,10 @@ function update() {
 	} else if(data.filter == "My Day") {
 		items = data.items.filter(function (task) {
 			return task.myDay;
+		});
+	} else if(data.filter == "Search") {
+		items = data.items.filter(function (task) {
+			return task.msg.search($("#search-input").value) != -1;
 		});
 	}
 	//按照priority排序，大的在前边

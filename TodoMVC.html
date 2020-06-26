@@ -22,7 +22,10 @@
 				<i class="fa fa-align-justify"></i>
 			</button>
 			<h1 id="title">Tasks</h1>
-
+			<div id="search" class="hidden">
+				<input type="text" id="search-input" placeholder="search something" autofocus>
+				<button id="search-submit"><i class="fa fa-search"></i></button>
+			</div>
 			<div id="dropdown">
 				<button id="dropdownbtn">
 					<i class="fa fa-ellipsis-v"></i>
@@ -61,7 +64,8 @@
 
 		<div id="menu" class="hidden">
 			<!-- 改为今日时间 -->
-			<h1>welcome</h1>
+			<h1 id="menu-title">welcome</h1>
+			<button id="switch-search"><i class="fa fa-search"></i></button>
 			<ul id="menu-list">
 				<!-- Todo：待加入今天 -->
 				<li id="switch-all" class="switch-list"><i class="fa fa-list" ></i><span>All</span></li>
@@ -69,8 +73,8 @@
 				<li id="switch-important" class="switch-list"><i class="fa fa-star"></i><span>Important</span></li>
 				<li id="switch-planned" class="switch-list"><i class="fa fa-calendar"></i><span>Planned</span></li>
 				<li id="switch-finished" class="switch-list"><i class="fa fa-check-square-o"></i><span>Finished</span></li>
-				<li class="switch-list"><i class="fa fa-check-square-o"></i><span>Theme</span></li>
-				<ul id="theme-list">
+				<li id="theme-list"><i class="fa fa-pie-chart"></i><span>Theme</span></li>
+				<ul id="theme-list" >
 					
 					<li id="theme1">theme1</li>
 					<li id="theme1">theme2</li>

@@ -296,7 +296,7 @@ header h1 {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	width:100%;
+	width:50%;
 	height: 100%;
 	background-color: white;
 	z-index: 102;
@@ -325,11 +325,19 @@ header h1 {
 .switch-list span{
 	margin-left:1em;
 }
+#menu-title {
+	display:inline;
+}
+#switch-search {
+	margin-left: 1em;
+	font-size: 25px;
+}
 #switch-important i{
 	color: rgb(148, 18, 18);
 }
 #switch-myDay i{
-	color: rgb(0, 204, 255);
+	color: rgb(197, 154, 12);
+	
 }
 #switch-planned i{
 	color: rgb(1, 121, 1);
@@ -338,6 +346,37 @@ header h1 {
 	color: rgb(121, 49, 1);
 }
 #switch-finished i{
-	color: rgb(197, 154, 12);
+	color: rgb(0, 204, 255);
+}
+#theme-list i {
+	color : rgb(255, 123, 0);
+}
+#theme-list span {
+	margin-left: 1em;
+}
+#search {
+	width: 80%;
+	/* float: left; */
+	position: relative;
+	overflow: hidden;
+	top:20px;
+	left: 10px;
+	/* margin-top: 16px; */
+	margin-left: 10px;
+	z-index: 110;
 }
 
+#search-input {
+	width: 80%;
+	/* height: 40px; */
+	/* line-height: 40px; */
+	font-size: 30px;
+	color: #555;
+	display: inline;
+  }
+#search-submit {
+	font-size: 25px;
+}
+#search-submit i{
+	color: white;
+}
