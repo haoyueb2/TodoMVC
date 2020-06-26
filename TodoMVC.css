@@ -4,7 +4,7 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	background-color: rgb(67, 92, 235);
+	/* background-color: rgb(67, 92, 235); */
 	/* overflow: hidden; */
 	/*禁止原生的页面滚动事件*/
 	/* position: relative; */
@@ -93,7 +93,18 @@ button {
 	font-size: small;
 	position: absolute;
 	bottom:5px;
+	right:3.5em;
+}
+.task-myDay {
+	color:rgb(16, 123, 247);
+	font-size: small;
+	position: absolute;
+	bottom:5px;
 	left:3.5em;
+}
+.task-myDay i{
+	color:rgb(16, 123, 247);
+	font-size: 5px;
 }
 .task-content {
 	display: inline-block;
@@ -213,7 +224,6 @@ header h1 {
 	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* 添加部分，参考 */
 
 #out-model {
     background-color: white;
@@ -320,6 +330,7 @@ header h1 {
 .added-myDay i{
 	color : rgb(16, 123, 247);
 }
+
 .switch-list span{
 	margin-left:1em;
 }

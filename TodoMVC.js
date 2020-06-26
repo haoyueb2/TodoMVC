@@ -204,7 +204,8 @@ window.onload = function () {
 	this.$All(".switch-theme").forEach(function (item) {
 		item.addEventListener("click",function() {
 			// console.log(window.getComputedStyle(item).backgroundColor);
-			document.body.style.backgroundColor = window.getComputedStyle(item).backgroundColor;
+			model.data.theme = window.getComputedStyle(item).backgroundColor;
+			update();
 		})
 	})
 	this.$All(".switch-list").forEach(function (item) {
@@ -290,6 +291,7 @@ function update() {
 	taskList.innerHTML = "";
 	finishedTaskList.innerHTML = "";
 
+	document.body.style.backgroundColor = model.data.theme;
 	if (data.filter == "Important") {
 		items = data.items.filter(function (task) {
 			return task.starred;
@@ -379,7 +381,13 @@ function createListItem(taskObj) {
 		taskDeadline.innerText = taskObj.deadline;
 		taskDeadline.className = "task-deadline";
 	}
-	taskContent.append(newTaskText, taskDeadline);
+
+	var taskMyDay = document.createElement("span");
+	taskMyDay.className="task-myDay";
+	if(taskObj.myDay) {
+		taskMyDay.innerHTML ="My Day"
+	}
+	taskContent.append(newTaskText, taskDeadline,taskMyDay);
 
 	var starButton = document.createElement("button");
 	starButton.type = "button";

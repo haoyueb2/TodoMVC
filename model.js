@@ -7,7 +7,8 @@ window.model = {
       taskId : 1,
       priority: 1,
       msg: '',
-      filter: 'All'
+      filter: 'All',
+      theme :'rgb(67, 92, 235)',
     },
     TOKEN: 'TodoMVC'
 }
