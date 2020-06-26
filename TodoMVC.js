@@ -14,6 +14,16 @@ function toggleInput() {
 	$("#add").classList.toggle("hidden");
 	$("#out-model").classList.toggle("hidden");
 }
+function displayDom(dom) {
+	if(dom.classList.contains("hidden")) {
+		dom.classList.toggle("hidden");
+	}
+}
+function hideDom(dom) {
+	if(!dom.classList.contains("hidden")) {
+		dom.classList.toggle("hidden");
+	}
+}
 function addToMyDay(isOpen) {
 	if(isOpen) {
 		if(!$("#add-myDay").classList.contains("added-myDay")) {
@@ -176,6 +186,16 @@ window.onload = function () {
 	this.$("#menu").addEventListener("click", function () {
 		$("#menu").classList.toggle("hidden");
 	});
+	var objToday = new Date(),
+	weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
+	dayOfWeek = weekday[objToday.getDay()],
+	domEnder = function() { var a = objToday; if (/1/.test(parseInt((a + "").charAt(0)))) return "th"; a = parseInt((a + "").charAt(1)); return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th" }(),
+	dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
+	months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+	curMonth = months[objToday.getMonth()];
+	var today =dayOfWeek + ", " + curMonth + " " + dayOfMonth;
+
+	$("#menu-title").innerText=today;
 
 	$("#toggle-theme").addEventListener("click",function(e) {
 		$("#theme-list").classList.toggle("hidden");
@@ -197,30 +217,40 @@ window.onload = function () {
 				$("#add").classList.toggle("hidden");
 				$("#count").classList.toggle("hidden");
 			} else {
-				//如果添加按钮被隐藏，则相关元素全部打开
-				if ($("#add").classList.contains("hidden")) {
-					$(".finished-header").classList.toggle("hidden");
-					$("#add").classList.toggle("hidden");
-					$("#count").classList.toggle("hidden");
-				}
+				displayDom($("#add"));
+				displayDom($(".finished-header"));
+				displayDom($("#count"));
+				// if ($("#add").classList.contains("hidden")) {
+				// 	$("#add").classList.toggle("hidden");
+				// }
+				// if($(".finished-header").classList.contains("hidden")) {
+				// 	$(".finished-header").classList.toggle("hidden");
+				// }
+				// if($("#count").classList.contains("hidden")) {
+				// 	$("#count").classList.toggle("hidden");
+				// }
 			}
-
-			if($("#title").classList.contains("hidden")) {
-				$("#title").classList.toggle("hidden");
-				$("#search").classList.toggle("hidden");
-			}
+			displayDom($("#title"));
+			hideDom($("#search"));
+			// if($("#title").classList.contains("hidden")) {
+			// 	$("#title").classList.toggle("hidden");
+			// 	$("#search").classList.toggle("hidden");
+			// }
 			$("#search-input").value="";
 			update();
 		});
 	});
 	this.$("#switch-search").addEventListener("click",function () {
 		model.data.filter = "Search";
-		$("#title").classList.toggle("hidden");
-		$("#search").classList.toggle("hidden");
+		// $("#title").classList.toggle("hidden");
+		// $("#search").classList.toggle("hidden");
+		hideDom($("#title"));
+		displayDom($("#search"));
 		// console.log(this.innerText =="");
-		if(!$("#add").classList.contains("hidden")) {
-			$("#add").classList.toggle("hidden");
-		}
+		// if(!$("#add").classList.contains("hidden")) {
+		// 	$("#add").classList.toggle("hidden");
+		// }
+		hideDom($("#add"));
 		
 		});
 
