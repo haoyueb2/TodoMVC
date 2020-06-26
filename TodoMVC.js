@@ -203,7 +203,6 @@ window.onload = function () {
 	})
 	this.$All(".switch-theme").forEach(function (item) {
 		item.addEventListener("click",function() {
-			// console.log(window.getComputedStyle(item).backgroundColor);
 			model.data.theme = window.getComputedStyle(item).backgroundColor;
 			update();
 		})
@@ -221,22 +220,9 @@ window.onload = function () {
 				displayDom($("#add"));
 				displayDom($(".finished-header"));
 				displayDom($("#count"));
-				// if ($("#add").classList.contains("hidden")) {
-				// 	$("#add").classList.toggle("hidden");
-				// }
-				// if($(".finished-header").classList.contains("hidden")) {
-				// 	$(".finished-header").classList.toggle("hidden");
-				// }
-				// if($("#count").classList.contains("hidden")) {
-				// 	$("#count").classList.toggle("hidden");
-				// }
 			}
 			displayDom($("#title"));
 			hideDom($("#search"));
-			// if($("#title").classList.contains("hidden")) {
-			// 	$("#title").classList.toggle("hidden");
-			// 	$("#search").classList.toggle("hidden");
-			// }
 			$("#search-input").value="";
 			update();
 		});
@@ -380,6 +366,15 @@ function createListItem(taskObj) {
 	if (taskObj.deadline) {
 		taskDeadline.innerText = taskObj.deadline;
 		taskDeadline.className = "task-deadline";
+		//如果deadline在过去则则设置为红色
+		d = new Date();
+		today = d.getFullYear()+"/"+(Number(d.getMonth())+1)+"/"+d.getDate();
+		var deadlineUnix = Date.parse(taskObj.deadline.replace(/\-/g, "/"));
+		var todayUnix = Date.parse(today);
+		if(todayUnix > deadlineUnix) {
+			taskDeadline.className = "task-deadline out-dated";
+		}
+
 	}
 
 	var taskMyDay = document.createElement("span");

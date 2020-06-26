@@ -95,6 +95,9 @@ button {
 	bottom:5px;
 	right:3.5em;
 }
+.out-dated {
+	color:red;
+}
 .task-myDay {
 	color:rgb(16, 123, 247);
 	font-size: small;
