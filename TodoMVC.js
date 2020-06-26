@@ -27,7 +27,6 @@ function hideDom(dom) {
 function addToMyDay(isOpen) {
 	if(isOpen) {
 		if(!$("#add-myDay").classList.contains("added-myDay")) {
-			// console.log($("#add-myDay").childNodes[1])
 			$("#add-myDay").innerHTML = "<i class='fa fa-sun-o'></i>Added to My Day";
 			$("#add-myDay").classList.toggle("added-myDay");
 		}
@@ -153,13 +152,11 @@ window.onload = function () {
 		});
 		model.data.priority =1;
 		model.data.items.forEach(function(item) {
-			// item.priority = model.data.priority;
 			item.priority = model.data.priority;
 			model.data.priority++;
 
 		});
 		hideDom($("#dropdown-content"));
-		// console.log(items);
 		update();
 	});
 
@@ -243,7 +240,6 @@ window.onload = function () {
 		});
 
 	this.$("#search-submit").addEventListener("click",function() {
-		// console.log("submit")
 		update();
 	})
 	this.update();
@@ -316,7 +312,6 @@ function update() {
 		if (!item.finished) ++activeCount;
 	});
 	$("#count").innerHTML = activeCount + " items left";
-	// console.log(items);
 	items
 		.filter(function (task) {
 			return !task.finished;
@@ -352,7 +347,6 @@ function createListItem(taskObj) {
 		if ($("#finished-tasks-list").classList.contains("hidden")) {
 			toggleFinished();
 		}
-		//Todo: 考虑有finish才hidden
 		update();
 		event.stopPropagation();
 	});
@@ -409,7 +403,6 @@ function createListItem(taskObj) {
 	item.addEventListener("click", function (event) {
 		id = Number(this.id);
 		var currentItem = getDataItemById(id);
-		// console.log(currentItem);
 		$("#todo").value = currentItem.msg;
 		$("#deadline-input").value = currentItem.deadline;
 		addToMyDay(currentItem.myDay);
@@ -459,7 +452,7 @@ function createListItem(taskObj) {
 	item.addEventListener(
 		"touchmove",
 		function (event) {
-			console.log("touchmove");
+			// console.log("touchmove");
 			var newTouch = event.touches[0];
 			offset = newTouch.clientX - oldTouch.clientX;
 			verticalOffset = newTouch.clientY - oldTouch.clientY;
@@ -529,7 +522,6 @@ function createListItem(taskObj) {
 				}
 			}
 			setTimeout(update, 100);
-			// update();
 			touchDom = null;
 			oldTouch = null;
 		},
