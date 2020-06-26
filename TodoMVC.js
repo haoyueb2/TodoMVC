@@ -27,13 +27,11 @@ function hideDom(dom) {
 function addToMyDay(isOpen) {
 	if(isOpen) {
 		if(!$("#add-myDay").classList.contains("added-myDay")) {
-			$("#add-myDay").innerHTML = "<i class='fa fa-sun-o'></i>Added to My Day";
 			$("#add-myDay").classList.toggle("added-myDay");
 		}
 	}
 	else {
 		if($("#add-myDay").classList.contains("added-myDay")) {
-			$("#add-myDay").innerHTML = "<i class='fa fa-sun-o'></i>Add to My Day";
 			$("#add-myDay").classList.toggle("added-myDay");
 		}
 	}
