@@ -4,9 +4,9 @@ typora-copy-images-to: doc_img
 
 # 地址
 
-github地址：https://github.com/mooooon333/TodoMVC
+github地址：https://github.com/haoyueb2/TodoMVC
 
-网页地址：https://mooooon333.github.io/TodoMVC/
+网页地址：https://haoyueb2.github.io/TodoMVC/
 
 （由于使用fontawesome可能导致第一次加载比较慢）
 
